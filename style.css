@@ -271,6 +271,58 @@ body {
     .bento-item.large { grid-column: span 1; flex-direction: column; text-align: center; }
     .cta-title { font-size: 2rem; }
 }
+/* Estilo das palavras */
+span {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    border-bottom: 1px dashed #ccc;
+    padding: 0 2px;
+    font-size: 1.1rem;
+    line-height: 2;
+    transition: background 0.2s;
+}
+
+span:hover {
+    background-color: #f0f7ff;
+    color: #1cb0f6;
+}
+
+/* O Balão Azul (Tooltip) */
+.word-tooltip {
+    position: absolute;
+    bottom: 130%; /* Fica acima da palavra */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1cb0f6; /* Azul Duolingo */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Setinha do balão */
+.word-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1cb0f6 transparent transparent transparent;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 5px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
 :root {
     --primary: #6366f1; /* Roxo Indigo Moderno */
     --primary-dark: #4f46e5;

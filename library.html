@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteca - Lerstoria</title>
+    <title>Lerstoria</title>
+
+        <link rel="icon" type="image/png" href="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775337424/izowmcoyatkdluan0kc3.png">
+
     <link rel="stylesheet" href="./style.css">
     <style>
         /* Ajustes de Layout do Perfil */
@@ -24,14 +27,14 @@
         .btn-logout:active { transform: translateY(2px); box-shadow: none; }
         
         .header-actions { display: flex; align-items: center; }
-        .level-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .level-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; margin-top: 40px; }
         .profile-text { display: flex; flex-direction: column; line-height: 1.2; }
         .welcome { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .book-card-link { text-decoration: none; color: inherit; }
 
         /* Botão de Quiz - Estilo 3D Duolingo */
         .btn-quiz { 
-            display: none; /* O JS decide quando mostrar */
+            display: none; 
             background-color: var(--primary);
             color: white;
             padding: 10px 22px;
@@ -63,6 +66,14 @@
             filter: grayscale(0);
             pointer-events: auto;
         }
+
+        .horizontal-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scrollbar-width: thin;
+        }
     </style>
 </head>
 <body>
@@ -70,7 +81,7 @@
     <header class="app-bar">
         <div class="container bar-flex">
             <div class="profile-section">
-                <div class="avatar">👤</div>
+                <div class="avatar">😉</div>
                 <div class="profile-text">
                     <span class="welcome">Olá,</span>
                     <span class="user-name">Carregando...</span>
@@ -99,29 +110,34 @@
                     <div class="fav-badge">✦</div>
                     <a href="/book.html?id=book_tree" class="book-card-link">
                         <div class="book-card">
-                            <div class="book-cover">
-                                <img src="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775328132/z1ptjpue42gs7pjyb0ls.png" alt="Saturn">
-                            </div>
+                            <div class="book-cover"><img src="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775328132/z1ptjpue42gs7pjyb0ls.png" alt="Saturn"></div>
                             <p>Saturn Exploded</p>
                         </div>
                     </a>
                 </div>
-            </div>
-        </section>
-
-        <section class="shelf-container locked" data-level="A2">
-            <div class="level-header">
-                <h2 class="level-tag">A2 - Elementary 🔒</h2>
-                <a href="/quiz.html?level=A2" class="btn-quiz">Fazer Prova A2</a>
-            </div>
-            <div class="horizontal-scroll">
+                <div class="book-item" data-id="a1_pet">
+                    <div class="fav-badge">✦</div>
+                    <a href="/book.html?id=a1_pet" class="book-card-link">
+                        <div class="book-card">
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=200" alt="Pet"></div>
+                            <p>The Happy Dog</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="book-item" data-id="a1_morning">
+                    <div class="fav-badge">✦</div>
+                    <a href="/book.html?id=a1_morning" class="book-card-link">
+                        <div class="book-card">
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200" alt="Morning"></div>
+                            <p>My Morning</p>
+                        </div>
+                    </a>
+                </div>
                 <div class="book-item" data-id="book_lunch">
                     <div class="fav-badge">✦</div>
                     <a href="/book.html?id=book_lunch" class="book-card-link">
                         <div class="book-card">
-                            <div class="book-cover">
-                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200" alt="Lunch">
-                            </div>
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200" alt="Lunch"></div>
                             <p>Lunch Time</p>
                         </div>
                     </a>
@@ -130,10 +146,62 @@
                     <div class="fav-badge">✦</div>
                     <a href="/book.html?id=book_bike" class="book-card-link">
                         <div class="book-card">
-                            <div class="book-cover">
-                                <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=200" alt="New Bike">
-                            </div>
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=200" alt="New Bike"></div>
                             <p>New Bike</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="shelf-container locked" data-level="A2">
+            <div class="level-header">
+                <h2 class="level-tag">A2 - Elementary  ✔</h2>
+                <a href="/quiz.html?level=A2" class="btn-quiz">Fazer Prova A2</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="book-item" data-id="a2_island">
+                    <div class="fav-badge">✦</div>
+                    <a href="/book.html?id=a2_island" class="book-card-link">
+                        <div class="book-card">
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200" alt="Island"></div>
+                            <p>The Blue Island</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="book-item" data-id="a2_chef">
+                    <div class="fav-badge">✦</div>
+                    <a href="/book.html?id=a2_chef" class="book-card-link">
+                        <div class="book-card">
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=200" alt="Chef"></div>
+                            <p>Italian Chef</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="book-item" data-id="a2_mountain">
+                    <div class="fav-badge">✦</div>
+                    <a href="/book.html?id=a2_mountain" class="book-card-link">
+                        <div class="book-card">
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=200" alt="Mountain"></div>
+                            <p>Cold Mountain</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="book-item" data-id="a2_library">
+                    <div class="fav-badge">✦</div>
+                    <a href="/book.html?id=a2_library" class="book-card-link">
+                        <div class="book-card">
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=200" alt="Library"></div>
+                            <p>Old Library</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="book-item" data-id="a2_train">
+                    <div class="fav-badge">✦</div>
+                    <a href="/book.html?id=a2_train" class="book-card-link">
+                        <div class="book-card">
+                            <div class="book-cover"><img src="https://images.unsplash.com/photo-1474487022156-65b03bb75634?w=200" alt="Train"></div>
+                            <p>Midnight Train</p>
                         </div>
                     </a>
                 </div>
@@ -142,28 +210,58 @@
 
         <section class="shelf-container locked" data-level="B1">
             <div class="level-header">
-                <h2 class="level-tag">B1 - Intermediate 🔒</h2>
+                <h2 class="level-tag">B1 - Intermediate  ✔</h2>
                 <a href="/quiz.html?level=B1" class="btn-quiz">Fazer Prova B1</a>
             </div>
             <div class="horizontal-scroll">
-                <p style="color: var(--text-muted); padding: 20px;">Complete o A2 para liberar!</p>
+                <div class="book-item" data-id="b1_future"><a href="/book.html?id=b1_future" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=200"></div><p>Future Cities</p></div></a></div>
+                <div class="book-item" data-id="b1_mystery"><a href="/book.html?id=b1_mystery" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=200"></div><p>Missing Key</p></div></a></div>
+                <div class="book-item" data-id="b1_job"><a href="/book.html?id=b1_job" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=200"></div><p>The New Job</p></div></a></div>
+                <div class="book-item" data-id="b1_climate"><a href="/book.html?id=b1_climate" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200"></div><p>Green Planet</p></div></a></div>
+                <div class="book-item" data-id="b1_festival"><a href="/book.html?id=b1_festival" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1459749411177-042180ce673c?w=200"></div><p>Music Festival</p></div></a></div>
             </div>
         </section>
 
         <section class="shelf-container locked" data-level="B2">
             <div class="level-header">
-                <h2 class="level-tag">B2 - Upper Intermediate 🔒</h2>
+                <h2 class="level-tag">B2 - Upper Intermediate  ✔</h2>
                 <a href="/quiz.html?level=B2" class="btn-quiz">Fazer Prova B2</a>
             </div>
-            <div class="horizontal-scroll"></div>
+            <div class="horizontal-scroll">
+                <div class="book-item" data-id="b2_space"><a href="/book.html?id=b2_space" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200"></div><p>Mars Mission</p></div></a></div>
+                <div class="book-item" data-id="b2_habit"><a href="/book.html?id=b2_habit" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=200"></div><p>Power Habits</p></div></a></div>
+                <div class="book-item" data-id="b2_startup"><a href="/book.html?id=b2_startup" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200"></div><p>The Startup</p></div></a></div>
+                <div class="book-item" data-id="b2_archeology"><a href="/book.html?id=b2_archeology" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1508921234172-b68ed335b3e6?w=200"></div><p>Hidden History</p></div></a></div>
+                <div class="book-item" data-id="b2_ai"><a href="/book.html?id=b2_ai" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=200"></div><p>Smart Machines</p></div></a></div>
+            </div>
         </section>
 
         <section class="shelf-container locked" data-level="C1">
             <div class="level-header">
-                <h2 class="level-tag">C1 - Advanced 🔒</h2>
+                <h2 class="level-tag">C1 - Advanced  ✔</h2>
                 <a href="/quiz.html?level=C1" class="btn-quiz">Fazer Prova C1</a>
             </div>
-            <div class="horizontal-scroll"></div>
+            <div class="horizontal-scroll">
+                <div class="book-item" data-id="c1_time"><a href="/book.html?id=c1_time" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1501139083538-0139583c060f?w=200"></div><p>Nature of Time</p></div></a></div>
+                <div class="book-item" data-id="c1_economy"><a href="/book.html?id=c1_economy" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1611974714851-eb605161ca81?w=200"></div><p>Global Markets</p></div></a></div>
+                <div class="book-item" data-id="c1_neuro"><a href="/book.html?id=c1_neuro" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=200"></div><p>Brain Plasticity</p></div></a></div>
+                <div class="book-item" data-id="c1_politics"><a href="/book.html?id=c1_politics" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=200"></div><p>Diplomacy</p></div></a></div>
+                <div class="book-item" data-id="c1_art"><a href="/book.html?id=c1_art" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=200"></div><p>Modern Art</p></div></a></div>
+            </div>
+        </section>
+
+        <section class="shelf-container locked" data-level="C2">
+            <div class="level-header">
+                <h2 class="level-tag">C2 - Mastery  ✔</h2>
+                <a href="/quiz.html?level=C2" class="btn-quiz">Fazer Prova C2</a>
+            </div>
+            <div class="horizontal-scroll">
+                <div class="book-item" data-id="c2_quantum"><a href="/book.html?id=c2_quantum" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200"></div><p>Quantum Physics</p></div></a></div>
+                <div class="book-item" data-id="c2_philosophy"><a href="/book.html?id=c2_philosophy" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=200"></div><p>Existentialism</p></div></a></div>
+                <div class="book-item" data-id="c2_genetics"><a href="/book.html?id=c2_genetics" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=200"></div><p>Genetics</p></div></a></div>
+                <div class="book-item" data-id="c2_sociology"><a href="/book.html?id=c2_sociology" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=200"></div><p>Sociology</p></div></a></div>
+                <div class="book-item" data-id="c2_astrophysics"><a href="/book.html?id=c2_astrophysics" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=200"></div><p>Black Holes</p></div></a></div>
+            </div>
         </section>
 
     </main>
