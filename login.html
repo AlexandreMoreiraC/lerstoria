@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Lerstoria</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="auth-page">
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <a href="index.html" class="logo">Lerstoria</a>
+            
+            <h1 class="story-title" style="font-size: 1.8rem; margin-bottom: 5px;">Bem-vindo de volta!</h1>
+            <p class="auth-subtitle">Sentimos sua falta na leitura.</p>
+            
+            <form id="login-form" class="auth-form">
+                <div class="input-group">
+                    <input type="email" id="login-email" placeholder="Seu e-mail" class="input-field" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder="Sua senha" class="input-field" required>
+                </div>
+                
+                <button type="submit" class="btn-primary btn-full">Entrar</button>
+            </form>
+
+            <div class="auth-footer">
+                Não tem uma conta? <a href="signup.html" class="auth-link">Crie uma agora</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { login } from './auth.js';
+
+        const loginForm = document.getElementById('login-form');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                await login(email, password);
+                // Redirecionamento após sucesso
+                window.location.href = 'library.html';
+            } catch (error) {
+                console.error("Erro ao entrar:", error);
+                
+                // Tratamento de erros amigável
+                const errorMap = {
+                    'auth/user-not-found': "E-mail não cadastrado.",
+                    'auth/wrong-password': "Senha incorreta.",
+                    'auth/invalid-credential': "Dados de acesso inválidos.",
+                    'auth/too-many-requests': "Muitas tentativas. Tente mais tarde."
+                };
+
+                alert(errorMap[error.code] || "Erro ao entrar: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

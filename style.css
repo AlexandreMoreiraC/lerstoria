@@ -1,0 +1,503 @@
+/* =========================================
+   1. CONFIGURAÇÕES GERAIS E VARIÁVEIS
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --primary: #6366f1; /* Roxo Indigo Moderno */
+    --primary-dark: #4f46e5;
+    --secondary: #f59e0b; /* Amarelo Âmbar para destaque */
+    --secondary-dark: #d97706;
+    --accent: #10b981; /* Verde Esmeralda para acertos */
+    --gray: #94a3b8;
+    --gray-light: #f1f5f9;
+    --gray-soft: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --red: #ef4444;
+    --red-dark: #dc2626;
+    --white: #ffffff;
+    --shadow: rgba(99, 102, 241, 0.1);
+    --radius-xl: 20px;
+    --radius-lg: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background-color: #f8fafc;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Scrollbar Customizada */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--gray-light); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+/* =========================================
+   2. HOME / HERO SECTION (INDEX.HTML)
+   ========================================= */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: radial-gradient(circle at top right, #eef2ff, #ffffff);
+    position: relative;
+}
+
+.simple-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    text-decoration: none;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: slideUp 0.8s ease-out;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: var(--text);
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 1.4rem;
+    color: var(--text-muted);
+    margin-bottom: 45px;
+    font-weight: 500;
+}
+
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   3. BOTÕES (SISTEMA DE CAMADAS 3D)
+   ========================================= */
+.btn-big, .btn-primary, .btn-full {
+    background-color: var(--primary) !important;
+    color: white !important;
+    padding: 16px 35px;
+    border-radius: var(--radius-lg);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow: 0 4px 0 var(--primary-dark);
+    display: inline-block;
+    transition: all 0.1s;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-big:hover, .btn-primary:hover, .btn-full:hover { 
+    transform: translateY(-1px); 
+    filter: brightness(1.1); 
+}
+
+.btn-big:active, .btn-primary:active, .btn-full:active {
+    box-shadow: 0 0 0 var(--primary-dark);
+    transform: translateY(4px);
+}
+
+.btn-tab {
+    flex: 1; padding: 14px; border-radius: var(--radius-lg);
+    border: 1px solid var(--border); background: white;
+    font-family: inherit; font-weight: 700; cursor: pointer;
+    color: var(--text-muted); transition: all 0.2s;
+    box-shadow: 0 2px 0 var(--border);
+}
+
+.btn-tab:hover { border-color: var(--primary); color: var(--primary); }
+
+.btn-tab.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 0 var(--primary-dark);
+}
+
+.btn-tab:active { transform: translateY(2px); box-shadow: 0 0 0 var(--border); }
+
+/* =========================================
+   4. BIBLIOTECA (LIBRARY.HTML)
+   ========================================= */
+.app-bar {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.bar-flex { display: flex; justify-content: space-between; align-items: center; }
+
+.profile-section { display: flex; align-items: center; gap: 14px; }
+
+.avatar {
+    width: 42px; height: 42px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: 800;
+}
+
+.user-name { font-weight: 700; color: var(--text); }
+.logo-small { color: var(--primary); font-weight: 900; font-size: 1.6rem; text-decoration: none; letter-spacing: -1px;}
+
+.action-row { display: flex; gap: 12px; margin: 35px 0; }
+
+.shelf-container { margin-bottom: 50px; transition: all 0.4s ease; }
+
+/* ESTADO BLOQUEADO (LOCKED) */
+.shelf-container.locked {
+    filter: grayscale(1); 
+    opacity: 0.5;
+    pointer-events: none; /* Impede qualquer clique */
+    user-select: none;
+}
+
+.level-tag {
+    font-size: 1.4rem; font-weight: 800; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+    color: var(--text);
+}
+
+.level-tag::before {
+    content: ''; width: 4px; height: 24px; background: var(--secondary); border-radius: 4px;
+}
+
+.horizontal-scroll {
+    display: flex; gap: 20px; overflow-x: auto;
+    padding: 10px 5px 30px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar { display: none; }
+
+/* =========================================
+   5. CARDS DE LIVRO E FAVORITOS
+   ========================================= */
+   .btn-minimal {
+    background: white;
+    border: 2px solid #e2e8f0;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.btn-minimal:hover {
+    border-color: #6366f1;
+    transform: translateY(-2px);
+}
+
+.btn-minimal.playing {
+    background: #6366f1;
+    color: white;
+    border-color: #4f46e5;
+}
+.book-item {
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.book-card {
+    min-width: 160px; 
+    text-align: left;
+}
+
+.book-cover {
+    width: 160px;
+    height: 220px;
+    border-radius: var(--radius-lg);
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.book-cover img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+
+.book-item:hover .book-cover img { transform: scale(1.1); }
+
+.book-card p {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-item:hover .book-cover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px var(--shadow);
+}
+
+.fav-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.2s;
+    border: 1px solid var(--border);
+}
+
+.fav-badge.active { background: var(--red); color: white; border-color: var(--red); }
+
+.btn-quiz {
+    background-color: var(--white);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 0.85rem;
+    border: 2px solid var(--primary);
+    margin-top: 12px;
+    display: none; /* O JS vai mostrar quando necessário */
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-quiz:hover { background: var(--primary); color: white; transform: scale(1.05); }
+
+/* =========================================
+   6. LEITOR (BOOK) E TOOLTIP
+   ========================================= */
+.reader-header { 
+    padding: 20px 0; 
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+}
+
+.reader-nav { display: flex; align-items: center; gap: 20px; }
+
+.btn-back { 
+    text-decoration: none; 
+    font-size: 24px; 
+    color: var(--text); 
+    font-weight: 800;
+}
+
+.progress-container {
+    flex: 1; height: 10px; background: var(--gray-light);
+    border-radius: 10px; overflow: hidden;
+}
+
+.progress-fill { 
+    height: 100%; 
+    background: var(--primary); 
+    transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1); 
+}
+
+.story-wrapper { max-width: 720px; margin: 60px auto 150px; padding: 0 20px; }
+
+.story-title { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    margin-bottom: 40px; 
+    color: var(--text);
+    letter-spacing: -1.5px;
+}
+
+.story-content p {
+    font-size: 1.4rem; 
+    line-height: 2; 
+    margin-bottom: 30px; 
+    color: #334155;
+}
+
+.story-content span {
+    cursor: pointer; 
+    border-bottom: 2px solid var(--gray-soft);
+    transition: 0.15s;
+}
+
+.story-content span:hover {
+    background-color: var(--primary); 
+    color: white;
+    border-color: var(--primary);
+    border-radius: 4px;
+}
+
+.tooltip {
+    position: absolute;
+    background: #1e293b;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    z-index: 1000;
+    pointer-events: none;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1e293b transparent transparent transparent;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 5px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* =========================================
+   7. AUTENTICAÇÃO (LOGIN & SIGNUP)
+   ========================================= */
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #ffffff, #f1f5f9);
+    padding: 20px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    animation: slideUp 0.5s ease-out;
+}
+
+.auth-card {
+    background: white;
+    padding: 40px;
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--border);
+    box-shadow: 0 10px 25px var(--shadow);
+}
+
+.auth-subtitle {
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.auth-form {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--gray-soft);
+    background: var(--gray-light);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: all 0.2s;
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.btn-full {
+    width: 100%;
+    padding: 18px !important;
+}
+
+.auth-footer {
+    margin-top: 25px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.auth-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 800;
+}
+
+/* =========================================
+   8. COMPONENTES EXTRAS E RESPONSIVIDADE
+   ========================================= */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .action-row { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .btn-tab { font-size: 0.8rem; padding: 10px; }
+    .book-cover { width: 140px; height: 190px; }
+    .story-title { font-size: 2.2rem; }
+}
+
+/* Final do Arquivo CSS */

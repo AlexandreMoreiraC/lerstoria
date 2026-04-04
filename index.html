@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lersotoria - Explore Histórias, Domine o Inglês</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        :root {
+            --accent: #6366f1;
+            --accent-soft: #e0e7ff;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            padding-top: 0; /* Removido padding fixo para efeito de transparência */
+            margin: 0;
+            background-color: var(--bg);
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #1e293b;
+        }
+
+        /* Header Flutuante Moderno */
+        .app-bar {
+            position: sticky;
+            top: 20px;
+            margin: 0 auto;
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            z-index: 1000;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .bar-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        /* Hero Section - Estilo Split */
+        .hero-section {
+            padding: 120px 20px 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top right, var(--accent-soft), transparent 40%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1100px;
+            align-items: center;
+        }
+
+        .hero-content { text-align: left; }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            line-height: 1;
+            font-weight: 900;
+            margin-bottom: 24px;
+            background: linear-gradient(to bottom right, #1e293b, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            border-radius: 30px;
+            transform: rotate(2deg);
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
+            transition: 0.5s;
+        }
+
+        .hero-image-wrapper img:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Bento Grid de Recursos */
+        .features-section { padding: 100px 20px; text-align: center; }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 50px auto;
+        }
+
+        .bento-item {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+            text-align: left;
+        }
+
+        .bento-item:hover { border-color: var(--accent); box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1); }
+
+        .bento-item.large { grid-column: span 2; display: flex; align-items: center; gap: 20px; }
+        
+        .feature-icon-box {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-soft);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo dos Botões */
+        .btn-main {
+            background: var(--accent);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3); }
+
+        /* Footer */
+        .footer-lp {
+            padding: 40px;
+            background: #1e293b;
+            color: #94a3b8;
+            text-align: center;
+            border-radius: 40px 40px 0 0;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-item.large { grid-column: span 1; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="app-bar">
+        <div class="container bar-flex">
+            <a href="index.html" class="logo">Lerstoria</a>
+            
+            <nav class="nav-auth-btns" id="auth-nav">
+                <a href="login.html" class="btn-login-text" style="text-decoration: none; font-weight: 600; color: #64748b; margin-right: 20px;">Entrar</a>
+                <a href="signup.html" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem; box-shadow: none;">Começar</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Leia. <br> Imagine. <br> <span style="color: var(--accent);">Aprenda.</span></h1>
+                <p>Abandone as listas de decoreba. Aprenda inglês vivendo histórias criadas especificamente para o seu nível de compreensão.</p>
+                
+                <div id="main-action">
+                    <a href="signup.html" class="btn-main">Explorar Biblioteca Grátis</a>
+                </div>
+            </div>
+
+            <div class="hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80" alt="App Lersotoria">
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 10px;">Feito para sua evolução</h2>
+        <p style="color: #64748b;">Uma experiência imersiva que substitui os livros didáticos chatos.</p>
+
+        <div class="bento-grid">
+            <div class="bento-item large">
+                <div>
+                    <div class="feature-icon-box">🎯</div>
+                    <h3>Curadoria por Nível</h3>
+                    <p>Do A1 ao B2. Textos com 95% de palavras que você já conhece, introduzindo o novo de forma natural.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f37?auto=format&fit=crop&w=300&q=80" style="width: 150px; border-radius: 15px;" alt="Levels">
+            </div>
+
+            <div class="bento-item">
+                <div class="feature-icon-box">⚡</div>
+                <h3>Smart Translate</h3>
+                <p>Tradução contextual em um toque. Não pare a leitura para abrir o dicionário.</p>
+            </div>
+
+            <div class="bento-item">
+                <div class="feature-icon-box">🔊</div>
+                <h3>Audio Imersivo</h3>
+                <p>Ouça a pronúncia nativa de cada parágrafo enquanto lê.</p>
+            </div>
+
+            <div class="bento-item large">
+                <div class="feature-icon-box">📈</div>
+                <h3>Seu progresso é visual</h3>
+                <p>Acompanhe palavras aprendidas, tempo de leitura e sua subida de nível em um dashboard intuitivo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 100px 20px; text-align: center;">
+        <div style="background: var(--accent); padding: 80px 40px; border-radius: 40px; max-width: 1000px; margin: 0 auto; color: white;">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">Pare de estudar, <br>comece a ler.</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">Milhares de brasileiros já mudaram sua relação com o inglês usando a Lersotoria.</p>
+            <a href="signup.html" class="btn-main" style="background: white; color: var(--accent); font-size: 1.2rem;">Criar Minha Conta</a>
+        </div>
+    </section>
+
+    <footer class="footer-lp">
+        <p>&copy; 2026 Lersotoria. A leitura é a chave para a fluência.</p>
+    </footer>
+
+    <script type="module">
+        import { auth } from './firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        onAuthStateChanged(auth, (user) => {
+            const authNav = document.getElementById('auth-nav');
+            const mainAction = document.getElementById('main-action');
+
+            if (user) {
+                authNav.innerHTML = `<a href="library.html" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem; box-shadow: none;">Minha Biblioteca</a>`;
+                mainAction.innerHTML = `<a href="library.html" class="btn-main">Continuar Leitura</a>`;
+            }
+        });
+    </script>
+</body>
+</html>

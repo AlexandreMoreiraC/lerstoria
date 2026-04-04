@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lendo - Lerstoria</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="reader-header">
+        <div class="container reader-nav">
+            <a href="/library.html" class="btn-back">✕</a>
+            <div class="progress-container">
+                <div class="progress-fill" id="progress-bar" style="width: 0%;"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <button id="btn-read-aloud" class="btn-minimal">
+    <span>✦</span> Ouvir Capítulo 🔊
+</button>
+        <article class="story-wrapper">
+            <h1 class="story-title" id="story-title">Carregando história...</h1>
+            
+            <div class="story-content" id="story-content">
+                </div>
+        </article>
+    </main>
+
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

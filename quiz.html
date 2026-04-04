@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio de Nível - Lerstoria</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .quiz-container { max-width: 600px; margin: 40px auto; padding: 25px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #eee; }
+        .question-header { margin-bottom: 20px; }
+        .question-text { font-size: 1.3rem; color: var(--text-main); margin-bottom: 20px; font-weight: 700; }
+        
+        .options-list { display: flex; flex-direction: column; gap: 12px; }
+        .option-btn { 
+            padding: 16px; border: 2px solid #e5e5e5; border-radius: 12px; 
+            background: white; cursor: pointer; font-family: inherit; font-weight: 600;
+            transition: all 0.2s; text-align: left; font-size: 1rem; color: var(--text-main);
+            box-shadow: 0 3px 0 #eee;
+        }
+        .option-btn:hover { border-color: var(--primary); background: #f0f7ff; transform: translateY(-1px); }
+        .option-btn:active { transform: translateY(2px); box-shadow: none; }
+        
+        /* Barra de Progresso Estilo Duolingo */
+        .progress-container { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
+        .progress-bar { flex-grow: 1; height: 14px; background: #e5e5e5; border-radius: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        
+        .result-screen { text-align: center; display: none; padding: 20px; }
+        .result-icon { font-size: 5rem; margin-bottom: 15px; }
+        .score-badge { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
+    </style>
+</head>
+<body>
+
+    <header class="app-bar">
+        <div class="container bar-flex">
+            <a href="library.html" class="btn-back">✕ Sair</a>
+            <div class="logo-small">Nível <span id="display-level">...</span></div>
+            <div style="width: 50px;"></div> 
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress"></div>
+                </div>
+                <span id="step-count" style="font-weight: 800; color: var(--text-muted);">1/10</span>
+            </div>
+
+            <div id="quiz-content">
+                <h2 class="question-text" id="question-text">Preparando questões...</h2>
+                <div class="options-list" id="options"></div>
+            </div>
+
+            <div id="result-screen" class="result-screen">
+                <div class="result-icon" id="result-icon">🎉</div>
+                <h2 id="result-title">Resultado</h2>
+                <div class="score-badge" id="score-badge">0%</div>
+                <p id="result-text" style="color: var(--text-muted); font-weight: 600;"></p>
+                <button onclick="window.location.href='library.html'" class="btn-big" style="margin-top: 30px; width: 100%;">Finalizar</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // BANCO DE PERGUNTAS GERAIS (Exemplos)
+        const allQuestions = {
+            "A1": [
+                { q: "How do you say 'Olá' in English?", options: ["Goodbye", "Hello", "Thank you"], correct: 1 },
+                { q: "What is the plural of 'Boy'?", options: ["Boys", "Boyes", "Boies"], correct: 0 },
+                { q: "I ___ from Brazil.", options: ["is", "am", "are"], correct: 1 },
+                { q: "Which color is the sky?", options: ["Green", "Blue", "Red"], correct: 1 },
+                { q: "She ___ a teacher.", options: ["is", "am", "are"], correct: 0 },
+                { q: "How many days are in a week?", options: ["5", "6", "7"], correct: 2 },
+                { q: "What is the opposite of 'Big'?", options: ["Small", "Large", "Fast"], correct: 0 },
+                { q: "I ___ like milk.", options: ["not", "don't", "no"], correct: 1 },
+                { q: "___ you speak English?", options: ["Do", "Are", "Is"], correct: 0 },
+                { q: "Which one is a fruit?", options: ["Car", "Apple", "Table"], correct: 1 }
+            ],
+            "A2": [
+                { q: "Yesterday I ___ to the cinema.", options: ["go", "gone", "went"], correct: 2 },
+                { q: "She is ___ than me.", options: ["taller", "tall", "tallest"], correct: 0 },
+                { q: "Have you ___ your homework?", options: ["did", "done", "do"], correct: 1 },
+                { q: "If it rains, I ___ a jacket.", options: ["wear", "will wear", "wore"], correct: 1 },
+                { q: "___ you ever been to USA?", options: ["Do", "Did", "Have"], correct: 2 },
+                { q: "I enjoy ___ books.", options: ["read", "reading", "to read"], correct: 1 },
+                { q: "There ___ some water in the bottle.", options: ["is", "are", "am"], correct: 0 },
+                { q: "What is the opposite of 'Expensive'?", options: ["Cheap", "Rich", "Poor"], correct: 0 },
+                { q: "They ___ playing when it started to rain.", options: ["is", "was", "were"], correct: 2 },
+                { q: "I ___ a new car last month.", options: ["buy", "bought", "buys"], correct: 1 }
+            ]
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const currentLevel = params.get('level') || 'A1';
+        document.getElementById('display-level').innerText = currentLevel;
+
+        // Lógica de Randomização
+        let rawQuestions = allQuestions[currentLevel] || allQuestions["A1"];
+        let questions = [...rawQuestions].sort(() => Math.random() - 0.5).slice(0, 10);
+        
+        let currentIdx = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = questions[currentIdx];
+            document.getElementById('question-text').innerText = q.q;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i);
+                optionsDiv.appendChild(btn);
+            });
+
+            // Atualiza barra e contador
+            const progress = ((currentIdx + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            document.getElementById('step-count').innerText = `${currentIdx + 1}/${questions.length}`;
+        }
+
+        async function checkAnswer(selected) {
+            if (selected === questions[currentIdx].correct) score++;
+            
+            currentIdx++;
+            if (currentIdx < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        async function showResults() {
+            document.getElementById('quiz-content').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            
+            const resultScreen = document.getElementById('result-screen');
+            const percent = (score / questions.length) * 100;
+            
+            resultScreen.style.display = 'block';
+            document.getElementById('score-badge').innerText = `${percent}%`;
+
+            if (percent >= 90) {
+                document.getElementById('result-icon').innerText = "🏆";
+                document.getElementById('result-title').innerText = "Nível Desbloqueado!";
+                document.getElementById('result-text').innerText = "Parabéns! Você provou que domina este nível.";
+                
+                if (auth.currentUser) {
+                    const userRef = doc(db, "users", auth.currentUser.uid);
+                    await updateDoc(userRef, {
+                        [`quizzes.${currentLevel}`]: true
+                    });
+                }
+            } else {
+                document.getElementById('result-icon').innerText = "❌";
+                document.getElementById('result-title').innerText = "Tente novamente";
+                document.getElementById('result-text').innerText = "Você precisa de 90% de acertos para avançar de nível.";
+            }
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

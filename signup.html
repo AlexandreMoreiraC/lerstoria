@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Criar Conta - Lerstoria</title>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <header class="auth-header">
+            <a href="index.html" class="logo">Lerstoria</a>
+            <h1 class="story-title" style="font-size: 2.2rem; margin-top: 10px;">Criar conta</h1>
+            <p class="auth-subtitle">Comece sua jornada de leitura hoje mesmo.</p>
+        </header>
+
+        <div class="auth-card">
+            <form id="signup-form" class="auth-form">
+                <div class="input-group">
+                    <input type="text" id="name" placeholder="Nome completo" class="input-field" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="E-mail" class="input-field" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Senha" class="input-field" required>
+                </div>
+                
+                <button type="submit" class="btn-primary btn-full">Criar minha conta</button>
+            </form>
+
+            <footer class="auth-footer">
+                <p>Já tem uma conta? <a href="login.html" class="auth-link">Entre aqui</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <script type="module">
+        import { signUp } from './auth.js';
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                await signUp(email, password, name);
+                window.location.href = 'library.html';
+            } catch (err) { 
+                alert("Erro ao criar conta: " + err.message); 
+            }
+        });
+    </script>
+</body>
+</html>
