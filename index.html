@@ -178,11 +178,11 @@
 
     <header class="app-bar">
         <div class="container bar-flex">
-            <a href="index.html" class="logo">Lerstoria</a>
+            <a href="/index.html" class="logo">Lerstoria</a>
             
             <nav class="nav-auth-btns" id="auth-nav">
-                <a href="login.html" class="btn-login-text" style="text-decoration: none; font-weight: 600; color: #64748b; margin-right: 20px;">Entrar</a>
-                <a href="signup.html" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem; box-shadow: none;">Começar</a>
+                <a href="/login.html" class="btn-login-text" style="text-decoration: none; font-weight: 600; color: #64748b; margin-right: 20px;">Entrar</a>
+                <a href="/signup.html" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem; box-shadow: none;">Começar</a>
             </nav>
         </div>
     </header>
@@ -194,7 +194,7 @@
                 <p>Abandone as listas de decoreba. Aprenda inglês vivendo histórias criadas especificamente para o seu nível de compreensão.</p>
                 
                 <div id="main-action">
-                    <a href="signup.html" class="btn-main">Explorar Biblioteca Grátis</a>
+                    <a href="/signup.html" class="btn-main">Explorar Biblioteca Grátis</a>
                 </div>
             </div>
 
@@ -242,7 +242,7 @@
         <div style="background: var(--accent); padding: 80px 40px; border-radius: 40px; max-width: 1000px; margin: 0 auto; color: white;">
             <h2 style="font-size: 3rem; margin-bottom: 20px;">Pare de estudar, <br>comece a ler.</h2>
             <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">Milhares de brasileiros já mudaram sua relação com o inglês usando a Lersotoria.</p>
-            <a href="signup.html" class="btn-main" style="background: white; color: var(--accent); font-size: 1.2rem;">Criar Minha Conta</a>
+            <a href="/signup.html" class="btn-main" style="background: white; color: var(--accent); font-size: 1.2rem;">Criar Minha Conta</a>
         </div>
     </section>
 
@@ -259,8 +259,8 @@
             const mainAction = document.getElementById('main-action');
 
             if (user) {
-                authNav.innerHTML = `<a href="library.html" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem; box-shadow: none;">Minha Biblioteca</a>`;
-                mainAction.innerHTML = `<a href="library.html" class="btn-main">Continuar Leitura</a>`;
+                authNav.innerHTML = `<a href="/library.html" class="btn-main" style="padding: 10px 20px; font-size: 0.9rem; box-shadow: none;">Minha Biblioteca</a>`;
+                mainAction.innerHTML = `<a href="/library.html" class="btn-main">Continuar Leitura</a>`;
             }
         });
     </script>
