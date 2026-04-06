@@ -1,295 +1,336 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775337424/izowmcoyatkdluan0kc3.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775337424/izowmcoyatkdluan0kc3.png">
+  <title>Desafio de Nível - Lerstoria</title>
 
-    <title>Desafio de Nível - Lerstoria</title>
-    <style>
-        :root {
-            --primary-color: #1cb0f6;
-            --bg-color: #f7f7f7;
-            --text-dark: #333;
-            --text-light: #afafaf;
-            --white: #ffffff;
-            --border-color: #e5e5e5;
-        }
+  <style>
+    /* =========================
+       RESET + BASE
+    ========================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg: #f6f3ff;
+      --bg-2: #eef2ff;
+      --surface: rgba(255,255,255,0.72);
+      --surface-strong: rgba(255,255,255,0.92);
+      --surface-dark: rgba(255,255,255,0.55);
+      --text: #1f2937;
+      --text-soft: #6b7280;
+      --text-muted: #94a3b8;
+      --stroke: rgba(255,255,255,0.45);
+      --stroke-strong: rgba(167,139,250,0.18);
+      --shadow: 0 20px 60px rgba(80,56,160,0.12);
+      --shadow-soft: 0 12px 30px rgba(80,56,160,0.08);
+      --primary: linear-gradient(135deg, #8b5cf6 0%, #6366f1 45%, #3b82f6 100%);
+      --primary-solid: #7c5cff;
+      --primary-dark: #6848f0;
+      --accent: #38bdf8;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --max-width: 1180px;
+    }
+    body {
+      font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(139,92,246,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(59,130,246,0.18), transparent 28%),
+        radial-gradient(circle at bottom center, rgba(56,189,248,0.12), transparent 30%),
+        linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: -1;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    body::before { top: -80px; left: -100px; background: rgba(139,92,246,0.22); }
+    body::after { bottom: -100px; right: -80px; background: rgba(59,130,246,0.18); }
+    .container { width: min(92%, var(--max-width)); margin: 0 auto; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    /* =========================
+       APP BAR
+    ========================= */
+    .app-bar { width: 100%; position: sticky; top: 0; z-index: 50; padding: 18px 0; backdrop-filter: blur(18px); background: rgba(255,255,255,0.55); border-bottom: 1px solid rgba(255,255,255,0.5); box-shadow: 0 8px 30px rgba(124,92,255,0.05); }
+    .bar-flex { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .btn-back {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-width: 108px; text-decoration: none; color: var(--text-soft); font-weight: 800;
+      font-size: 0.98rem; padding: 12px 18px; border-radius: 999px; background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.55); box-shadow: var(--shadow-soft); transition: all 0.25s ease;
+    }
+    .btn-back:hover { transform: translateY(-2px); color: var(--primary-solid); background: rgba(255,255,255,0.92); }
+    .logo-small {
+      font-size: 1rem; font-weight: 900; letter-spacing: 0.3px; color: var(--text);
+      padding: 12px 18px; border-radius: 999px; background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.55); box-shadow: var(--shadow-soft); text-align: center; white-space: nowrap;
+    }
+    .logo-small span { background: var(--primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .bar-spacer { min-width: 108px; }
 
-        .app-bar {
-            width: 100%;
-            background: var(--white);
-            border-bottom: 2px solid var(--border-color);
-            padding: 15px 0;
-            margin-bottom: 30px;
-        }
+    /* =========================
+       MAIN QUIZ AREA
+    ========================= */
+    main.container { width: min(92%, 900px); padding: 42px 0 60px; display: flex; justify-content: center; }
+    .quiz-container {
+      width: 100%; max-width: 760px; background: var(--surface); border: 1px solid var(--stroke);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: var(--shadow);
+      border-radius: var(--radius-lg); padding: 34px; position: relative; overflow: hidden;
+    }
+    .quiz-container::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.24), rgba(255,255,255,0.04)),
+        radial-gradient(circle at top right, rgba(139,92,246,0.10), transparent 28%);
+      pointer-events: none;
+    }
+    #quiz-ui, #result-screen { position: relative; z-index: 1; }
 
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    .quiz-top { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .quiz-badge { display: inline-flex; align-items: center; width: fit-content; gap: 8px; padding: 10px 14px; border-radius: 999px; background: rgba(124,92,255,0.10); border: 1px solid rgba(124,92,255,0.14); color: var(--primary-solid); font-size: 0.9rem; font-weight: 800; }
+    .quiz-title { font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; font-weight: 900; color: var(--text); }
+    .quiz-subtitle { color: var(--text-soft); font-size: 1rem; line-height: 1.6; max-width: 600px; font-weight: 500; }
 
-        .bar-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .progress-container { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; padding: 18px; border-radius: 22px; background: rgba(255,255,255,0.56); border: 1px solid rgba(255,255,255,0.5); box-shadow: var(--shadow-soft); }
+    .progress-bar { flex: 1; height: 16px; background: rgba(226,232,240,0.9); border-radius: 999px; overflow: hidden; position: relative; }
+    .progress-fill { height: 100%; width: 0%; border-radius: inherit; background: var(--primary); box-shadow: 0 0 20px rgba(124,92,255,0.25); transition: width 0.45s cubic-bezier(0.175,0.885,0.32,1.1); }
+    #step-count { min-width: 58px; text-align: right; font-weight: 900; color: var(--text-soft); font-size: 0.98rem; }
 
-        .btn-back {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 800;
-            font-size: 1.2rem;
-        }
+    #quiz-content { display: flex; flex-direction: column; gap: 20px; }
+    .question-card { background: rgba(255,255,255,0.72); border: 1px solid rgba(255,255,255,0.5); border-radius: 26px; padding: 28px; box-shadow: var(--shadow-soft); }
+    .question-label { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; margin-bottom: 18px; border-radius: 999px; background: rgba(56,189,248,0.10); border: 1px solid rgba(56,189,248,0.14); color: #0284c7; font-size: 0.85rem; font-weight: 800; }
+    .question-text { font-size: clamp(1.25rem, 2.2vw, 1.65rem); color: var(--text); font-weight: 900; line-height: 1.45; letter-spacing: -0.02em; }
+    .options-list { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .option-btn {
+      width: 100%; padding: 18px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.78); box-shadow: 0 8px 22px rgba(124,92,255,0.06);
+      cursor: pointer; font-family: inherit; font-size: 1rem; font-weight: 700; color: #374151; text-align: left;
+      transition: all 0.22s ease; position: relative; overflow: hidden;
+    }
+    .option-btn::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(59,130,246,0.06)); opacity: 0; transition: opacity 0.22s ease; pointer-events: none; }
+    .option-btn:hover { transform: translateY(-3px) scale(1.01); border-color: rgba(124,92,255,0.25); box-shadow: 0 16px 35px rgba(124,92,255,0.12); color: var(--primary-dark); }
+    .option-btn:hover::before { opacity: 1; }
+    .option-btn:active { transform: translateY(0px) scale(0.995); }
 
-        .logo-small {
-            font-weight: 800;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
+    .result-screen { display: none; text-align: center; padding: 14px 6px 6px; animation: fadeUp 0.5s ease; }
+    .result-icon { font-size: clamp(4rem, 8vw, 5.5rem); margin-bottom: 14px; }
+    .result-title { font-size: clamp(1.8rem, 3vw, 2.3rem); font-weight: 900; color: var(--text); margin-bottom: 12px; line-height: 1.15; }
+    .score-badge { width: fit-content; margin: 18px auto 18px; padding: 16px 24px; border-radius: 999px; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; background: rgba(124,92,255,0.10); color: var(--primary-solid); border: 1px solid rgba(124,92,255,0.14); box-shadow: var(--shadow-soft); }
+    .result-text { max-width: 620px; margin: 0 auto; color: var(--text-soft); font-size: 1rem; line-height: 1.8; font-weight: 600; }
+    .btn-big { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 30px; border: none; outline: none; cursor: pointer; border-radius: 18px; padding: 18px 24px; font-size: 1rem; font-weight: 900; color: white; background: var(--primary); box-shadow: 0 16px 30px rgba(124,92,255,0.22); transition: all 0.22s ease; }
+    .btn-big:hover { transform: translateY(-2px); box-shadow: 0 20px 35px rgba(124,92,255,0.28); }
+    .btn-big:active { transform: translateY(0); }
 
-        .quiz-container {
-            width: 100%;
-            max-width: 600px;
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-            border: 2px solid var(--border-color);
-            box-sizing: border-box;
-        }
-
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .progress-bar {
-            flex-grow: 1;
-            height: 14px;
-            background: var(--border-color);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-color);
-            width: 0%;
-            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            color: var(--text-dark);
-            margin-bottom: 25px;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .option-btn {
-            padding: 18px;
-            border: 2px solid var(--border-color);
-            border-radius: 15px;
-            background: var(--white);
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            transition: all 0.2s;
-            text-align: left;
-            font-size: 1.05rem;
-            color: #4b4b4b;
-            box-shadow: 0 4px 0 var(--border-color);
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary-color);
-            background: #f0f7ff;
-            transform: translateY(-2px);
-        }
-
-        .option-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        .result-screen {
-            text-align: center;
-            display: none;
-            padding: 20px;
-        }
-
-        .result-icon { font-size: 5rem; margin-bottom: 15px; }
-        .score-badge { font-size: 2.5rem; font-weight: 800; color: var(--primary-color); margin: 15px 0; }
-        
-        .btn-big {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            font-size: 1.1rem;
-            width: 100%;
-            box-shadow: 0 5px 0 #1899d6;
-            transition: all 0.1s;
-        }
-
-        .btn-big:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #1899d6;
-        }
-    </style>
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    /* Responsivo simplificado para manter CSS curto (igual ao seu original) */
+  </style>
 </head>
 <body>
 
-    <header class="app-bar">
-        <div class="container bar-flex">
-            <a href="library.html" class="btn-back">✕ Sair</a>
-            <div class="logo-small">Nível <span id="display-level">...</span></div>
-            <div style="width: 50px;"></div> 
+<header class="app-bar">
+  <div class="container bar-flex">
+    <a href="library.html" class="btn-back">✕ Sair</a>
+    <div class="logo-small">Nível <span id="display-level">...</span></div>
+    <div class="bar-spacer"></div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="quiz-container">
+    <div id="quiz-ui">
+      <div class="quiz-top">
+        <div class="quiz-badge">✨ Quiz de Proficiência</div>
+        <h1 class="quiz-title">Teste o teu nível de inglês</h1>
+        <p class="quiz-subtitle">Responde às perguntas e descobre se já estás pronto para validar este nível dentro da biblioteca Lerstoria.</p>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+        <span id="step-count">1/10</span>
+      </div>
+
+      <div id="quiz-content">
+        <div class="question-card">
+          <div class="question-label">📘 Pergunta atual</div>
+          <h2 class="question-text" id="question-text">Preparando desafio...</h2>
         </div>
-    </header>
+        <div class="options-list" id="options"></div>
+      </div>
+    </div>
 
-    <main class="container">
-        <div class="quiz-container">
-            <div id="quiz-ui">
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress"></div>
-                    </div>
-                    <span id="step-count" style="font-weight: 800; color: var(--text-light);">1/10</span>
-                </div>
+    <div id="result-screen" class="result-screen">
+      <div class="result-icon" id="result-icon">🎉</div>
+      <h2 id="result-title" class="result-title">Resultado</h2>
+      <div class="score-badge" id="score-badge">0%</div>
+      <p id="result-text" class="result-text"></p>
+      <button onclick="window.location.href='library.html'" class="btn-big">Voltar para Biblioteca</button>
+    </div>
+  </div>
+</main>
 
-                <div id="quiz-content">
-                    <h2 class="question-text" id="question-text">Preparando desafio C2...</h2>
-                    <div class="options-list" id="options"></div>
-                </div>
-            </div>
+<script type="module">
+  import { auth, db } from './firebase-config.js';
+  import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-            <div id="result-screen" class="result-screen">
-                <div class="result-icon" id="result-icon">🎉</div>
-                <h2 id="result-title">Resultado</h2>
-                <div class="score-badge" id="score-badge">0%</div>
-                <p id="result-text" style="color: #777; font-weight: 600; line-height: 1.5;"></p>
-                <button onclick="window.location.href='library.html'" class="btn-big" style="margin-top: 30px;">Voltar para Biblioteca</button>
-            </div>
-        </div>
-    </main>
+  // Perguntas por nível
+  const allQuestions = {
+  "A1": [
+    { q: "What is the color of the sky?", options: ["Blue", "Red", "Green"], correct: 0 },
+    { q: "How do you say 'Olá' in English?", options: ["Hello", "Bye", "Thanks"], correct: 0 },
+    { q: "Which number comes after 3?", options: ["4", "5", "2"], correct: 0 },
+    { q: "What is the opposite of 'hot'?", options: ["Cold", "Warm", "Cool"], correct: 0 },
+    { q: "I ___ a book.", options: ["read", "reads", "reading"], correct: 0 },
+    { q: "Choose the correct article: ___ apple", options: ["An", "A", "The"], correct: 0 },
+    { q: "What day comes after Monday?", options: ["Tuesday", "Sunday", "Friday"], correct: 0 },
+    { q: "How do you say 'Obrigado' in English?", options: ["Thank you", "Please", "Sorry"], correct: 0 },
+    { q: "What is 2 + 2?", options: ["3", "4", "5"], correct: 1 },
+    { q: "Choose the correct pronoun: ___ am happy.", options: ["I", "You", "He"], correct: 0 }
+  ],
 
-    <script type="module">
-        import { auth, db } from './firebase-config.js';
-        import { doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  "A2": [
+    { q: "I ___ to school every day.", options: ["go", "went", "gone"], correct: 0 },
+    { q: "Which one is a fruit?", options: ["Car", "Apple", "Chair"], correct: 1 },
+    { q: "He ___ playing football now.", options: ["is", "are", "am"], correct: 0 },
+    { q: "Choose the correct past tense: Yesterday I ___ to the park.", options: ["go", "went", "gone"], correct: 1 },
+    { q: "How do you say 'casa' in English?", options: ["House", "Home", "Room"], correct: 0 },
+    { q: "They ___ not like pizza.", options: ["do", "does", "did"], correct: 0 },
+    { q: "What is the plural of 'child'?", options: ["childs", "children", "childes"], correct: 1 },
+    { q: "I have ___ money than you.", options: ["much", "many", "more"], correct: 2 },
+    { q: "Choose the correct sentence:", options: ["She can sings", "She can sing", "She can sang"], correct: 1 },
+    { q: "What is the color of bananas?", options: ["Yellow", "Blue", "Red"], correct: 0 }
+  ],
 
-        const allQuestions = {
-            "C2": [
-                { q: "The proposal was ___ with fierce opposition from the board members.", options: ["hit", "met", "faced"], correct: 1 },
-                { q: "She has always been a ___ of strength for her family.", options: ["tower", "pillar", "rock"], correct: 1 },
-                { q: "Under no circumstances ___ the door be left unlocked.", options: ["must", "should", "shall"], correct: 1 },
-                { q: "To all ___ and purposes, the project is already finished.", options: ["intents", "goals", "reasons"], correct: 0 },
-                { q: "He is ___ to win the competition if he keeps this pace.", options: ["bound", "likely", "certainly"], correct: 0 },
-                { q: "The evidence points ___ to his innocence.", options: ["strongly", "overwhelmingly", "highly"], correct: 1 },
-                { q: "He has a ___ for getting into trouble.", options: ["knack", "habit", "tendency"], correct: 0 },
-                { q: "___ of the consequences, he decided to proceed.", options: ["Regardless", "Irrespective", "Ignoring"], correct: 1 },
-                { q: "The decision was made in ___ with the law.", options: ["accordance", "compliance", "alignment"], correct: 0 },
-                { q: "His speech was ___ with irony.", options: ["filled", "laced", "covered"], correct: 1 }
-            ]
-        };
+  "B1": [
+    { q: "She has been working here ___ 2015.", options: ["since", "for", "at"], correct: 0 },
+    { q: "Choose the correct sentence:", options: ["I can to swim", "I can swim", "I can swims"], correct: 1 },
+    { q: "I ___ never seen this movie before.", options: ["have", "has", "had"], correct: 0 },
+    { q: "If I ___ time, I would travel more.", options: ["have", "had", "has"], correct: 1 },
+    { q: "He asked me ___ I was busy.", options: ["if", "that", "what"], correct: 0 },
+    { q: "Choose the correct form: I am looking forward ___ your reply.", options: ["to", "for", "at"], correct: 0 },
+    { q: "She prefers tea ___ coffee.", options: ["than", "over", "to"], correct: 2 },
+    { q: "We have lived here ___ five years.", options: ["since", "for", "during"], correct: 1 },
+    { q: "The cake ___ delicious!", options: ["tastes", "taste", "tasting"], correct: 0 },
+    { q: "Which word is a synonym of 'happy'?", options: ["Sad", "Joyful", "Angry"], correct: 1 }
+  ],
 
-        const params = new URLSearchParams(window.location.search);
-        const currentLevel = params.get('level') || 'C2';
-        document.getElementById('display-level').innerText = currentLevel;
+  "B2": [
+    { q: "If I ___ you, I would accept the offer.", options: ["was", "were", "am"], correct: 1 },
+    { q: "Choose the correct phrasal verb: 'He ___ up smoking.'", options: ["gave", "gave in", "gave up"], correct: 2 },
+    { q: "She acted ___ she knew the answer.", options: ["like", "as if", "as"], correct: 1 },
+    { q: "They demanded that he ___ immediately.", options: ["leaves", "leave", "left"], correct: 1 },
+    { q: "I don’t mind ___ early.", options: ["to wake up", "waking up", "wake up"], correct: 1 },
+    { q: "Choose the correct word: He made a ___ decision.", options: ["prompt", "quickly", "rapidly"], correct: 0 },
+    { q: "Despite ___ tired, she continued working.", options: ["being", "been", "be"], correct: 0 },
+    { q: "The film was ___ entertaining than I expected.", options: ["more", "most", "much"], correct: 0 },
+    { q: "Which word is closest in meaning to 'astonished'?", options: ["Surprised", "Bored", "Angry"], correct: 0 },
+    { q: "He had ___ the instructions carefully.", options: ["read", "reads", "reading"], correct: 0 }
+  ],
 
-        // Seleciona as questões (ou C2 por padrão se o nível não existir no objeto)
-        let questions = [...(allQuestions[currentLevel] || allQuestions["C2"])].sort(() => Math.random() - 0.5);
-        let currentIdx = 0;
-        let score = 0;
+  "C1": [
+    { q: "Not only ___ he talented, but also very humble.", options: ["is", "was", "has"], correct: 0 },
+    { q: "The company is looking for someone who can think outside the ___", options: ["box", "circle", "line"], correct: 0 },
+    { q: "Had I known, I ___ have called her.", options: ["would", "will", "shall"], correct: 0 },
+    { q: "The proposal was met with fierce ___ from the committee.", options: ["opposition", "support", "indifference"], correct: 0 },
+    { q: "She spoke in a ___ manner that impressed everyone.", options: ["eloquent", "silent", "shy"], correct: 0 },
+    { q: "It is imperative that he ___ on time.", options: ["arrives", "arrive", "arrived"], correct: 1 },
+    { q: "He acted ___ he owned the place.", options: ["as if", "like", "as"], correct: 0 },
+    { q: "___ he finished the project, he went on vacation.", options: ["Once", "Although", "Because"], correct: 0 },
+    { q: "The book offers a ___ insight into human nature.", options: ["profound", "simple", "shallow"], correct: 0 },
+    { q: "She has a ___ understanding of complex topics.", options: ["deep", "shallow", "weak"], correct: 0 }
+  ],
 
-        function loadQuestion() {
-            const q = questions[currentIdx];
-            document.getElementById('question-text').innerText = q.q;
-            const optionsDiv = document.getElementById('options');
-            optionsDiv.innerHTML = '';
-            
-            q.options.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(i);
-                optionsDiv.appendChild(btn);
-            });
+  "C2": [
+    { q: "The proposal was ___ with fierce opposition from the board members.", options: ["hit", "met", "faced"], correct: 1 },
+    { q: "She has always been a ___ of strength for her family.", options: ["tower", "pillar", "rock"], correct: 1 },
+    { q: "Under no circumstances ___ the door be left unlocked.", options: ["must", "should", "shall"], correct: 0 },
+    { q: "To all ___ and purposes, the project is already finished.", options: ["intents", "goals", "reasons"], correct: 0 },
+    { q: "He is ___ to win the competition if he keeps this pace.", options: ["bound", "likely", "certainly"], correct: 0 },
+    { q: "The evidence points ___ to his innocence.", options: ["strongly", "overwhelmingly", "highly"], correct: 1 },
+    { q: "He has a ___ for getting into trouble.", options: ["knack", "habit", "tendency"], correct: 0 },
+    { q: "___ of the consequences, he decided to proceed.", options: ["Regardless", "Irrespective", "Ignoring"], correct: 0 },
+    { q: "The decision was made in ___ with the law.", options: ["accordance", "compliance", "alignment"], correct: 0 },
+    { q: "His speech was ___ with irony.", options: ["filled", "laced", "covered"], correct: 1 }
+  ]
+};
 
-            const progress = ((currentIdx) / questions.length) * 100;
-            document.getElementById('progress').style.width = `${progress}%`;
-            document.getElementById('step-count').innerText = `${currentIdx + 1}/${questions.length}`;
+  const params = new URLSearchParams(window.location.search);
+  const currentLevel = params.get('level') || 'C2';
+  document.getElementById('display-level').innerText = currentLevel;
+
+  let questions = [...(allQuestions[currentLevel] || allQuestions["C2"])].sort(() => Math.random() - 0.5);
+  let currentIdx = 0;
+  let score = 0;
+
+  function loadQuestion() {
+    const q = questions[currentIdx];
+    document.getElementById('question-text').innerText = q.q;
+    const optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerText = opt;
+      btn.onclick = () => checkAnswer(i);
+      optionsDiv.appendChild(btn);
+    });
+    const progress = (currentIdx / questions.length) * 100;
+    document.getElementById('progress').style.width = `${progress}%`;
+    document.getElementById('step-count').innerText = `${currentIdx + 1}/${questions.length}`;
+  }
+
+  async function checkAnswer(selected) {
+    if (selected === questions[currentIdx].correct) score++;
+    currentIdx++;
+    if (currentIdx < questions.length) loadQuestion();
+    else showResults();
+  }
+
+  async function showResults() {
+    document.getElementById('quiz-ui').style.display = 'none';
+    const resultScreen = document.getElementById('result-screen');
+    const percent = Math.round((score / questions.length) * 100);
+    resultScreen.style.display = 'block';
+    document.getElementById('score-badge').innerText = `${percent}%`;
+
+    if (percent >= 90) {
+      document.getElementById('result-icon').innerText = "🏆";
+      document.getElementById('result-title').innerText = "Maestria Alcançada!";
+      document.getElementById('result-text').innerText = `Incrível! Você provou ter domínio total do nível ${currentLevel}. Seu progresso foi salvo.`;
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          const userRef = doc(db, "users", user.uid);
+          try { await updateDoc(userRef, { [`quizzes_done.${currentLevel}`]: true }); }
+          catch (e) { console.error("Erro ao salvar progresso:", e); }
         }
+      });
+    } else {
+      document.getElementById('result-icon').innerText = "📚";
+      document.getElementById('result-title').innerText = "Continue Estudando";
+      document.getElementById('result-text').innerText = `Você acertou ${score} de ${questions.length}. No nível ${currentLevel}, precisamos de 90% de precisão para validar sua proficiência.`;
+    }
+  }
 
-        async function checkAnswer(selected) {
-            if (selected === questions[currentIdx].correct) {
-                score++;
-            }
-            
-            currentIdx++;
-            if (currentIdx < questions.length) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        async function showResults() {
-            document.getElementById('quiz-ui').style.display = 'none';
-            const resultScreen = document.getElementById('result-screen');
-            const percent = (score / questions.length) * 100;
-            
-            resultScreen.style.display = 'block';
-            document.getElementById('score-badge').innerText = `${percent}%`;
-
-            if (percent >= 90) {
-                document.getElementById('result-icon').innerText = "🏆";
-                document.getElementById('result-title').innerText = "Maestria Alcançada!";
-                document.getElementById('result-text').innerText = `Incrível! Você provou ter domínio total do nível ${currentLevel}. Seu progresso foi salvo.`;
-                
-                auth.onAuthStateChanged(async (user) => {
-                    if (user) {
-                        const userRef = doc(db, "users", user.uid);
-                        try {
-                            await updateDoc(userRef, {
-                                [`quizzes_done.${currentLevel}`]: true
-                            });
-                        } catch (e) {
-                            console.error("Erro ao salvar progresso:", e);
-                        }
-                    }
-                });
-            } else {
-                document.getElementById('result-icon').innerText = "📚";
-                document.getElementById('result-title').innerText = "Continue Estudando";
-                document.getElementById('result-text').innerText = `Você acertou ${score} de ${questions.length}. No nível C2, precisamos de 90% de precisão para validar sua proficiência.`;
-            }
-        }
-
-        // Inicia o Quiz
-        loadQuestion();
-    </script>
+  loadQuestion();
+</script>
 </body>
 </html>
