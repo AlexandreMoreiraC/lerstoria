@@ -95,13 +95,88 @@ const bookData = {
     title: "Saturn Exploded",
     level: "A1",
     content: `
-        <p><span>Saturn</span> <span>is</span> <span>a</span> <span>very</span> <span>big</span> <span>planet</span> <span>in</span> <span>the</span> <span>sky</span>. <span>It</span> <span>has</span> <span>many</span> <span>rings</span>. <span>The</span> <span>rings</span> <span>are</span> <span>beautiful</span> <span>and</span> <span>bright</span>. <span>One day</span>, <span>a</span> <span>small</span> <span>boy</span> <span>looks at</span> <span>the</span> <span>stars</span>. <span>He</span> <span>has</span> <span>a</span> <span>big</span> <span>telescope</span>. <span>He</span> <span>sees</span> <span>Saturn</span>. <span>But</span> <span>then</span>, <span>something</span> <span>happens</span>. <span>Saturn</span> <span>is</span> <span>not</span> <span>there</span>. <span>There is</span> <span>a</span> <span>big</span> <span>flash</span> <span>of</span> <span>light</span>.</p>
-        
-        <p><span>The</span> <span>boy</span> <span>is</span> <span>very</span> <span>surprised</span>. "<span>Where</span> <span>is</span> <span>Saturn</span>?" <span>he</span> <span>asks</span>. <span>He</span> <span>runs</span> <span>to</span> <span>his</span> <span>father</span>. <span>His</span> <span>father</span> <span>is</span> <span>a</span> <span>scientist</span>. <span>The</span> <span>father</span> <span>looks at</span> <span>the</span> <span>sky</span>. <span>He</span> <span>sees</span> <span>the</span> <span>light</span> <span>too</span>. <span>They</span> <span>are</span> <span>both</span> <span>quiet</span> <span>for</span> <span>a</span> <span>long time</span>. <span>It</span> <span>is</span> <span>a</span> <span>mystery</span>. <span>The</span> <span>next day</span>, <span>the</span> <span>news</span> <span>is</span> <span>on</span> <span>TV</span>. <span>Everyone</span> <span>is</span> <span>talking</span> <span>about</span> <span>the</span> <span>planet</span>.</p>
-        
-        <p><span>The</span> <span>boy</span> <span>thinks</span> <span>about</span> <span>the</span> <span>rings</span>. <span>He</span> <span>thinks</span> <span>about</span> <span>the</span> <span>dust</span> <span>and</span> <span>the</span> <span>ice</span>. <span>He</span> <span>wants</span> <span>to</span> <span>know</span> <span>the</span> <span>truth</span>. <span>Was</span> <span>it</span> <span>a</span> <span>bomb</span>? <span>Was</span> <span>it</span> <span>a</span> <span>rock</span>? <span>The</span> <span>science</span> <span>books</span> <span>say</span> <span>planets</span> <span>are</span> <span>very</span> <span>strong</span>. <span>But</span> <span>Saturn</span> <span>is</span> <span>gone</span> <span>now</span>. <span>The</span> <span>sky</span> <span>looks</span> <span>different</span> <span>at</span> <span>night</span>. <span>The</span> <span>stars</span> <span>are</span> <span>still</span> <span>there</span>, <span>but</span> <span>the</span> <span>giant</span> <span>is</span> <span>not</span>.</p>
-        
-        <p><span>He</span> <span>dreams</span> <span>of</span> <span>traveling</span> <span>to</span> <span>the</span> <span>place</span> <span>where</span> <span>Saturn</span> <span>was</span>. <span>He</span> <span>wants</span> <span>to</span> <span>find</span> <span>a</span> <span>small</span> <span>piece</span> <span>of</span> <span>the</span> <span>ring</span>. <span>He</span> <span>wants</span> <span>to</span> <span>keep</span> <span>it</span> <span>in</span> <span>a</span> <span>jar</span>. <span>It</span> <span>is</span> <span>a</span> <span>sad</span> <span>day</span> <span>for</span> <span>astronomy</span>, <span>but</span> <span>a</span> <span>big</span> <span>day</span> <span>for</span> <span>his</span> <span>imagination</span>. <span>The</span> <span>universe</span> <span>is</span> <span>full of</span> <span>secrets</span>. <span>He</span> <span>looks at</span> <span>his</span> <span>telescope</span> <span>one last time</span> <span>before</span> <span>bed</span>.</p>
+        <p>
+            <span>Saturn</span> <span>is</span> <span>a</span> <span>very</span> <span>big</span> <span>planet</span> <span>in</span> <span>the</span> <span>sky.</span> 
+            <span>It</span> <span>has</span> <span>many</span> <span>rings.</span> 
+            <span>The</span> <span>rings</span> <span>are</span> <span>beautiful</span> <span>and</span> <span>bright.</span> 
+            <span>One day,</span> <span>a</span> <span>small</span> <span>boy</span> <span>looks at</span> <span>the</span> <span>stars.</span>
+        </p>
+        <a>
+            Saturno é um planeta muito grande no céu. Ele tem muitos anéis. Os anéis são bonitos e brilhantes. Um dia, um menino pequeno olha para as estrelas.
+        </a>  <p>
+        <p>
+            <span>He</span> <span>has</span> <span>a</span> <span>big</span> <span>telescope.</span> 
+            <span>He</span> <span>sees</span> <span>Saturn.</span> 
+            <span>But</span> <span>then,</span> <span>something</span> <span>happens.</span> 
+            <span>Saturn</span> <span>is</span> <span>not</span> <span>there.</span> 
+            <span>There is</span> <span>a</span> <span>big</span> <span>flash</span> <span>of</span> <span>light.</span>
+        </p>
+        <a aria-hidden="true">
+            Ele tem um telescópio grande. Ele vê Saturno. Mas então, algo acontece. Saturno não está lá. Há um grande flash de luz.
+        </a>  <p>
+
+        <p>
+            <span>The</span> <span>boy</span> <span>is</span> <span>very</span> <span>surprised.</span> 
+            <span>"Where</span> <span>is</span> <span>Saturn?"</span> 
+            <span>he</span> <span>asks.</span> 
+            <span>He</span> <span>runs</span> <span>to</span> <span>his</span> <span>father.</span> 
+            <span>His</span> <span>father</span> <span>is</span> <span>a</span> <span>scientist.</span> 
+            <span>The</span> <span>father</span> <span>looks at</span> <span>the</span> <span>sky.</span> 
+            <span>He</span> <span>sees</span> <span>the</span> <span>light</span> <span>too.</span>
+        </p>
+        <a aria-hidden="true">
+            O menino está muito surpreso. "Onde está Saturno?" ele pergunta. Ele corre para o pai. O pai dele é um cientista. O pai olha para o céu. Ele também vê a luz.
+        </a>  <p>
+
+        <p>
+            <span>They</span> <span>are</span> <span>both</span> <span>quiet</span> <span>for</span> <span>a</span> <span>long time.</span> 
+            <span>It</span> <span>is</span> <span>a</span> <span>mystery.</span> 
+            <span>The</span> <span>next day,</span> <span>the</span> <span>news</span> <span>is</span> <span>on</span> <span>TV.</span> 
+            <span>Everyone</span> <span>is</span> <span>talking</span> <span>about</span> <span>the</span> <span>planet.</span>
+        </p>
+        <a aria-hidden="true">
+            Ambos ficam quietos por um longo tempo. É um mistério. No dia seguinte, a notícia está na TV. Todos estão falando sobre o planeta.
+        </a>  <p>
+
+        <p>
+            <span>The</span> <span>boy</span> <span>thinks</span> <span>about</span> <span>the</span> <span>rings.</span> 
+            <span>He</span> <span>thinks</span> <span>about</span> <span>the</span> <span>dust</span> <span>and</span> <span>the</span> <span>ice.</span> 
+            <span>He</span> <span>wants</span> <span>to</span> <span>know</span> <span>the</span> <span>truth.</span> 
+            <span>Was</span> <span>it</span> <span>a</span> <span>bomb?</span> 
+            <span>Was</span> <span>it</span> <span>a</span> <span>rock?</span> 
+            <span>The</span> <span>science</span> <span>books</span> <span>say</span> <span>planets</span> <span>are</span> <span>very</span> <span>strong.</span>
+        </p>
+        <a aria-hidden="true">
+            O menino pensa nos anéis. Ele pensa na poeira e no gelo. Ele quer saber a verdade. Foi uma bomba? Foi uma pedra? Os livros de ciência dizem que os planetas são muito fortes.
+        </a>  <p>
+
+        <p>
+            <span>But</span> <span>Saturn</span> <span>is</span> <span>gone</span> <span>now.</span> 
+            <span>The</span> <span>sky</span> <span>looks</span> <span>different</span> <span>at</span> <span>night.</span> 
+            <span>The</span> <span>stars</span> <span>are</span> <span>still</span> <span>there,</span> <span>but</span> <span>the</span> <span>giant</span> <span>is</span> <span>not.</span>
+        </p>
+        <a aria-hidden="true">
+            Mas Saturno se foi agora. O céu parece diferente à noite. As estrelas ainda estão lá, mas o gigante não está.
+        </a>  <p>
+
+        <p>
+            <span>He</span> <span>dreams</span> <span>of</span> <span>traveling</span> <span>to</span> <span>the</span> <span>place</span> <span>where</span> <span>Saturn</span> <span>was.</span> 
+            <span>He</span> <span>wants</span> <span>to</span> <span>find</span> <span>a</span> <span>small</span> <span>piece</span> <span>of</span> <span>the</span> <span>ring.</span> 
+            <span>He</span> <span>wants</span> <span>to</span> <span>keep</span> <span>it</span> <span>in</span> <span>a</span> <span>jar.</span>
+        </p>
+        <a aria-hidden="true">
+            Ele sonha em viajar para o lugar onde Saturno estava. Ele quer encontrar um pequeno pedaço do anel. Ele quer guardá-lo em um pote.
+        </a>  <p>
+
+        <p>
+            <span>It</span> <span>is</span> <span>a</span> <span>sad</span> <span>day</span> <span>for</span> <span>astronomy,</span> 
+            <span>but</span> <span>a</span> <span>big</span> <span>day</span> <span>for</span> <span>his</span> <span>imagination.</span> 
+            <span>The</span> <span>universe</span> <span>is</span> <span>full of</span> <span>secrets.</span> 
+            <span>He</span> <span>looks at</span> <span>his</span> <span>telescope</span> <span>one last time</span> <span>before</span> <span>bed.</span>
+        </p>
+        <a aria-hidden="true">
+            É um dia triste para a astronomia, mas um grande dia para a imaginação dele. O universo está cheio de segredos. Ele olha pelo telescópio uma última vez antes de dormir.
+        </a>  <p>
     `
 },
    "a1_pet": {
@@ -298,37 +373,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadBookContent();
 
-    // --- 3. FUNÇÃO DE VOZ (TEXT-TO-SPEECH) ---
-    window.toggleOuvir = () => {
-        if (sintetizador.speaking) {
-            sintetizador.cancel();
-            atualizarBotaoAudio(false);
-            return;
-        }
+// --- 3. FUNÇÃO DE VOZ (TEXT-TO-SPEECH) ---
+window.toggleOuvir = () => {
+    if (sintetizador.speaking) {
+        sintetizador.cancel();
+        atualizarBotaoAudio(false);
+        return;
+    }
 
-        if (storyContainer) {
-            const texto = storyContainer.innerText;
-            locucao = new SpeechSynthesisUtterance(texto);
-            locucao.lang = 'en-US';
-            locucao.rate = 0.9;
+    if (storyContainer) {
+        const spans = storyContainer.querySelectorAll('span:not([aria-hidden="true"]):not(.no-tts)');
+        const texto = Array.from(spans).map(s => s.innerText).join(' ');
 
-            locucao.onstart = () => atualizarBotaoAudio(true);
-            locucao.onend = () => atualizarBotaoAudio(false);
-            locucao.onerror = () => atualizarBotaoAudio(false);
+        locucao = new SpeechSynthesisUtterance(texto);
+        locucao.lang = 'en-US';
+        locucao.rate = 0.8;      // velocidade natural
+        locucao.pitch = 0.9;     // tom natural
+        locucao.volume = 1;      // volume máximo
 
-            sintetizador.speak(locucao);
-        }
-    };
+        // Seleciona voz masculina em inglês se disponível
+        const voices = sintetizador.getVoices();
+        locucao.voice = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('male')) 
+                        || voices.find(v => v.lang.startsWith('en')) 
+                        || null;
 
-    const atualizarBotaoAudio = (tocando) => {
-        const btn = document.getElementById('btn-read-aloud');
-        if (btn) {
-            btn.innerHTML = tocando 
-                ? `<span>✦</span> Parar Leitura ⏹` 
-                : `<span>✦</span> Ouvir Capítulo 🔊`;
-            btn.classList.toggle('playing', tocando);
-        }
-    };
+        locucao.onstart = () => atualizarBotaoAudio(true);
+        locucao.onend = () => atualizarBotaoAudio(false);
+        locucao.onerror = () => atualizarBotaoAudio(false);
+
+        sintetizador.speak(locucao);
+
+        // Para depuração: ver todas vozes disponíveis
+        speechSynthesis.onvoiceschanged = () => {
+            console.log(speechSynthesis.getVoices());
+        };
+    }
+};
+
+// Função corrigida para atualizar botão
+const atualizarBotaoAudio = (tocando) => {
+    const btn = document.getElementById('btn-read-aloud');
+    if (btn) {
+        btn.innerHTML = tocando 
+            ? '<span>✦</span> Parar Leitura ⏹' 
+            : '<span>✦</span> Ouvir Capítulo 🔊';
+        btn.classList.toggle('playing', tocando);
+    }
+};
 
     // --- 4. ESTADO DO USUÁRIO (FIREBASE) ---
     let currentUser = null;
@@ -457,46 +548,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 7. TRADUTOR ---
-    if (storyContainer) {
-        storyContainer.addEventListener('click', async (e) => {
-            const el = e.target;
-            if (el.tagName === 'SPAN') {
-                const word = el.innerText.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").trim();
-                if (!word) return;
+// --- 7. TRADUTOR ---
+if (storyContainer) {
+    storyContainer.addEventListener('click', async (e) => {
+        const el = e.target;
+        if (el.tagName === 'SPAN') {
+            // Limpa a palavra, remove pontuação e espaços extras
+            const word = el.innerText.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "").trim();
+            if (!word) return;
 
-                if (activeTooltip) activeTooltip.remove();
-                const tooltip = document.createElement('div');
-                tooltip.className = 'tooltip';
-                tooltip.innerText = "🔍...";
-                document.body.appendChild(tooltip);
-                
-                const rect = el.getBoundingClientRect();
-                tooltip.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`;
-                tooltip.style.top = `${rect.top + window.scrollY - 45}px`;
-                activeTooltip = tooltip;
+            // Remove tooltip anterior
+            if (activeTooltip) activeTooltip.remove();
 
-                try {
-                    const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|pt-BR`);
-                    const data = await response.json();
-                    let translations = [data.responseData.translatedText.toLowerCase()];
-                    
-                    if (data.matches) {
-                        data.matches.forEach(m => {
-                            const t = m.translation.toLowerCase().trim();
-                            if (!translations.includes(t) && t.length < 20) translations.push(t);
-                        });
-                    }
-                    tooltip.innerText = translations.slice(0, 3).join(' / ');
-                } catch { tooltip.innerText = "Erro ❌"; }
+            // Cria tooltip temporário
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.innerText = "🔍 Traduzindo...";
+            document.body.appendChild(tooltip);
+
+            // Posiciona tooltip centralizado sobre o span
+            const rect = el.getBoundingClientRect();
+            tooltip.style.left = `${Math.min(rect.left + rect.width / 2 + window.scrollX, window.innerWidth - 150)}px`;
+            tooltip.style.top = `${Math.max(rect.top + window.scrollY - 50, 10)}px`;
+            activeTooltip = tooltip;
+
+            try {
+                // Requisição MyMemory
+                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|pt-BR`);
+                const data = await response.json();
+
+                let translations = [];
+
+                // Adiciona tradução principal
+                if (data.responseData && data.responseData.translatedText) {
+                    translations.push(data.responseData.translatedText.toLowerCase().trim());
+                }
+
+                // Adiciona matches alternativos
+                if (data.matches && data.matches.length) {
+                    data.matches.forEach(m => {
+                        const t = m.translation.toLowerCase().trim();
+                        if (t && !translations.includes(t) && t.length < 25) translations.push(t);
+                    });
+                }
+
+                // Mostra até 3 traduções
+                tooltip.innerText = translations.length ? translations.slice(0).join(' / ') : "Sem tradução";
+            } catch (err) {
+                console.error('Erro na tradução:', err);
+                tooltip.innerText = "Erro ❌";
             }
-        });
+        }
+    });
 
-        document.addEventListener('mousedown', (e) => {
-            if (activeTooltip && !e.target.closest('.tooltip') && e.target.tagName !== 'SPAN') {
-                activeTooltip.remove();
-                activeTooltip = null;
-            }
-        });
-    }
-});
+    // Remove tooltip ao clicar fora
+    document.addEventListener('mousedown', (e) => {
+        if (activeTooltip && !e.target.closest('.tooltip') && e.target.tagName !== 'SPAN') {
+            activeTooltip.remove();
+            activeTooltip = null;
+} }); } });
