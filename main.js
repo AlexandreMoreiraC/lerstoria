@@ -403,14 +403,14 @@ window.toggleOuvir = async () => {
 
     // 🎧 deixa mais natural
     utterance.rate = 0.8;
-    utterance.pitch = 0.7;
+    utterance.pitch = 1;
     utterance.volume = 5;
 
    const voices = await getVoicesAsync();
     // 🎯 tenta pegar a melhor voz disponível
     const bestVoice =
     voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('google')) ||
-    voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('male')) ||
+    voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('female')) ||
     voices.find(v => v.lang === 'en-GB') ||
     voices.find(v => v.lang.includes('en')) ||
     null;
