@@ -500,6 +500,222 @@ select {
     }
 }
 
+
+/* RESET LOCAL */
+#test-container {
+  padding-left: 260px;
+}
+
+/* PAGE */
+.test-page {
+  width: 100%;
+  max-width: 700px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* HEADER */
+.test-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding: 0 10px;
+}
+
+.test-header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #312a72, #04265e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.test-header p {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+/* BOX PRINCIPAL */
+.test-box {
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: clamp(18px, 3vw, 32px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  width: 100%;
+  transition: 0.3s;
+}
+
+/* PROGRESS */
+.test-progress {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+#test-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #6d5efc, #3b82f6);
+  transition: width 0.3s ease;
+}
+
+/* PERGUNTA */
+#test-question {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* RESPOSTAS */
+#test-options {
+  display: grid;
+  gap: 12px;
+}
+
+#test-options button {
+  padding: clamp(12px, 2.5vw, 16px);
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+  transition: 0.2s;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+/* HOVER (desktop) */
+@media (hover: hover) {
+  #test-options button:hover {
+    transform: translateY(-2px);
+    border-color: #6d5efc;
+    box-shadow: 0 10px 20px rgba(109,94,252,0.15);
+  }
+}
+
+/* TOUCH (mobile feedback) */
+#test-options button:active {
+  transform: scale(0.98);
+}
+
+/* CONTADOR */
+.test-counter {
+  margin-top: 15px;
+  color: #6b7280;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  text-align: right;
+}
+
+/* FINAL SCREEN */
+.test-final {
+  text-align: center;
+  padding: 10px;
+}
+
+.test-final h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 10px;
+}
+
+.test-final p {
+  color: #6b7280;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+}
+
+.test-final button {
+  margin-top: 20px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #6d5efc, #3b82f6);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.test-final button:hover {
+  transform: scale(1.05);
+}
+
+/* BOTÃO INICIAL */
+.start-test-btn {
+  margin: 40px auto;
+  display: block;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #6d5efc, #3b82f6);
+  color: white;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.start-test-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(109,94,252,0.3);
+}
+
+/* 📱 MOBILE */
+@media (max-width: 600px) {
+  #test-container {
+    padding: 30px 15px;
+  }
+
+  .test-box {
+    border-radius: 16px;
+    padding: 18px;
+  }
+
+  #test-options {
+    gap: 10px;
+  }
+
+  #test-options button {
+    padding: 12px;
+  }
+}
+
+/* 📱 TELAS MUITO PEQUENAS */
+@media (max-width: 400px) {
+  .test-box {
+    padding: 14px;
+  }
+}
+
+/* 📲 TABLET */
+@media (min-width: 768px) {
+  .test-box {
+    padding: 30px;
+  }
+}
+
+/* 💻 DESKTOP GRANDE */
+@media (min-width: 1200px) {
+  .test-page {
+    max-width: 1000px;
+  }
+}
+
 .btn-quiz {
   display: inline-flex;
   align-items: center;

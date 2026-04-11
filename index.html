@@ -100,14 +100,149 @@
 </div>
   </section>
 
-   <!-- 🔥 BOTÃO DO TESTE -->
+<!-- 🔥 BOTÃO DO TESTE -->
+<section class="test-section">
 
-  <div style="text-align:center; margin: 40px 0;">
-    <a href="test.html" class="btn-test">
-      Fazer teste e descobrir meu nível
-    </a>
+  <button onclick="startTest()" class="start-test-btn">
+    Fazer Teste de Inglês
+  </button>
+
+</section>
+
+<!-- TESTE -->
+<div id="test-container" style="display:none;">
+
+  <div class="test-page">
+
+    <div class="test-header">
+      <h1>Lerstoria Language Assessment</h1>
+      <p>Discover your English level and continue your journey</p>
+    </div>
+
+    <div class="test-box">
+
+      <div class="test-progress">
+        <div id="test-progress-bar"></div>
+      </div>
+
+      <h2 id="test-question"></h2>
+
+      <div id="test-options"></div>
+
+      <p class="test-counter" id="test-counter"></p>
+
+    </div>
+
   </div>
 
+</div>
+
+<script>
+function startTest() {
+  document.getElementById("test-container").style.display = "block";
+  document.querySelector(".start-test-btn").style.display = "none";
+  document.getElementById("test-container").scrollIntoView({ behavior: "smooth" });
+
+  load();
+}
+
+const questions = [
+// A1
+{ q:"What color is the sky on a clear day?", options:["Blue","Green","Red"], answer:"Blue" },
+{ q:"How do you greet someone in the morning?", options:["Hello","Goodbye","Sorry"], answer:"Hello" },
+{ q:"What is 2 + 2?", options:["4","3","5"], answer:"4" },
+{ q:"I ___ a book every night.", options:["read","reads","reading"], answer:"read" },
+{ q:"She ___ my best friend.", options:["is","are","am"], answer:"is" },
+{ q:"This is ___ apple.", options:["an","a","the"], answer:"an" },
+
+// A2
+{ q:"I usually ___ to school by bus.", options:["go","went","gone"], answer:"go" },
+{ q:"He ___ football at the moment.", options:["is playing","plays","played"], answer:"is playing" },
+{ q:"Yesterday I ___ home early.", options:["went","go","gone"], answer:"went" },
+{ q:"She ___ like coffee.", options:["doesn't","don't","didn't"], answer:"doesn't" },
+{ q:"We ___ watching a movie now.", options:["are","is","be"], answer:"are" },
+{ q:"The plural of 'child' is ___.", options:["children","childs","childes"], answer:"children" },
+
+// B1
+{ q:"She has lived here ___ 2015.", options:["since","for","during"], answer:"since" },
+{ q:"I have ___ seen that movie.", options:["never","ever","already"], answer:"never" },
+{ q:"If I ___ rich, I would travel the world.", options:["were","am","was"], answer:"were" },
+{ q:"He asked me ___ I was busy.", options:["if","that","whether"], answer:"if" },
+{ q:"I’m interested ___ photography.", options:["in","on","at"], answer:"in" },
+{ q:"She prefers tea ___ coffee.", options:["to","than","over"], answer:"to" },
+
+// B2
+{ q:"If I ___ you, I would accept the offer.", options:["were","was","am"], answer:"were" },
+{ q:"She acted as if she ___ everything.", options:["knew","knows","know"], answer:"knew" },
+{ q:"I don’t mind ___ early.", options:["waking up","wake up","to wake"], answer:"waking up" },
+{ q:"He denied ___ the document.", options:["signing","to sign","sign"], answer:"signing" },
+{ q:"The meeting was called ___.", options:["off","up","out"], answer:"off" },
+{ q:"She managed ___ the exam.", options:["to pass","passing","pass"], answer:"to pass" },
+
+// C1
+{ q:"Not only ___ he talented, but also disciplined.", options:["is","was","has"], answer:"is" },
+{ q:"Think outside the ___", options:["box","circle","line"], answer:"box" },
+{ q:"She spoke in an ___ way.", options:["eloquent","simple","basic"], answer:"eloquent" },
+{ q:"It is vital that he ___ on time.", options:["arrive","arrives","arrived"], answer:"arrive" },
+
+// C2
+{ q:"Under no circumstances ___ the door be left open.", options:["must","should","can"], answer:"must" },
+{ q:"The proposal was ___ with strong opposition.", options:["met","faced","hit"], answer:"met" }
+];
+
+let i = 0;
+let score = 0;
+
+function load() {
+  const q = questions[i];
+
+  document.getElementById("test-question").innerText = q.q;
+  document.getElementById("test-counter").innerText = `${i + 1} / ${questions.length}`;
+
+  const box = document.getElementById("test-options");
+  box.innerHTML = "";
+
+  q.options
+    .sort(() => Math.random() - 0.5)
+    .forEach(opt => {
+      const btn = document.createElement("button");
+      btn.innerText = opt;
+
+      btn.onclick = () => {
+        if (opt === q.answer) score++;
+        i++;
+        i < questions.length ? load() : finish();
+      };
+
+      box.appendChild(btn);
+    });
+
+  document.getElementById("test-progress-bar").style.width =
+    (i / questions.length) * 100 + "%";
+}
+
+function finish() {
+  document.querySelector(".test-box").innerHTML = `
+    <div class="test-final">
+      <h2>Your Level: ${getLevel()}</h2>
+      <p>You scored ${score} / ${questions.length}</p>
+      <button onclick="location.reload()">Voltar</button>
+    </div>
+  `;
+}
+
+function getLevel() {
+  const p = score / questions.length;
+
+  if (p >= 0.9) return "C2";
+  if (p >= 0.8) return "C1";
+  if (p >= 0.7) return "B2";
+  if (p >= 0.55) return "B1";
+  if (p >= 0.4) return "A2";
+  return "A1";
+}
+</script>
+<br>
   <!-- BENEFITS -->
     <div class="container">
       <div class="section-heading">
