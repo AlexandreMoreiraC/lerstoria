@@ -515,62 +515,83 @@ const updateFavVisuals = () => {
         });
     });
 
-// --- 7. TRADUTOR ---
-if (storyContainer) {
-    storyContainer.addEventListener('click', async (e) => {
-        const el = e.target;
-        if (el.tagName === 'SPAN') {
-            // Limpa a palavra, remove pontuação e espaços extras
-            const word = el.innerText.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "").trim();
-            if (!word) return;
+// Variável global para controlar o tooltip ativo
 
-            // Remove tooltip anterior
-            if (activeTooltip) activeTooltip.remove();
+// --- 7. TRADUTOR (VERSÃO CORRIGIDA) ---
+// Usamos document.addEventListener para capturar cliques em SPANs mesmo que eles sejam injetados depois
+document.addEventListener('click', async (e) => {
+    const el = e.target;
 
-            // Cria tooltip temporário
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.innerText = "🔍 Traduzindo...";
-            document.body.appendChild(tooltip);
+    // Verifica se o clique foi em um SPAN dentro do conteúdo da história
+    if (el.tagName === 'SPAN' && el.closest('#story-content')) {
+        
+        // 1. Limpa a palavra (remove pontuação e números)
+        const word = el.innerText.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()0-9]/g, "").trim();
+        if (!word) return;
 
-            // Posiciona tooltip centralizado sobre o span
-            const rect = el.getBoundingClientRect();
-            tooltip.style.left = `${Math.min(rect.left + rect.width / 2 + window.scrollX, window.innerWidth - 150)}px`;
-            tooltip.style.top = `${Math.max(rect.top + window.scrollY - 50, 10)}px`;
-            activeTooltip = tooltip;
+        // 2. Remove tooltip anterior se existir
+        if (activeTooltip) activeTooltip.remove();
 
-            try {
-                // Requisição MyMemory
-                const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|pt-BR`);
-                const data = await response.json();
+        // 3. Cria o Tooltip com o estilo de livro
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.innerText = "🔍 Traduzindo...";
+        document.body.appendChild(tooltip);
+        activeTooltip = tooltip;
 
-                let translations = [];
+        // 4. Posicionamento Dinâmico
+        const rect = el.getBoundingClientRect();
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
 
-                // Adiciona tradução principal
-                if (data.responseData && data.responseData.translatedText) {
-                    translations.push(data.responseData.translatedText.toLowerCase().trim());
-                }
+        // Ajuste centralizado acima da palavra
+        tooltip.style.position = 'absolute';
+        tooltip.style.zIndex = '9999';
+        tooltip.style.left = `${rect.left + scrollX + (rect.width / 2)}px`;
+        tooltip.style.top = `${rect.top + scrollY - 10}px`;
+        tooltip.style.transform = 'translate(-50%, -100%)';
 
-                // Adiciona matches alternativos
-                if (data.matches && data.matches.length) {
-                    data.matches.forEach(m => {
-                        const t = m.translation.toLowerCase().trim();
-                        if (t && !translations.includes(t) && t.length < 25) translations.push(t);
-                    });
-                }
+        try {
+            // 5. Requisição para API MyMemory
+            const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|pt-BR`);
+            const data = await response.json();
 
-                // Mostra até 3 traduções
-                tooltip.innerText = translations.length ? translations.slice(0).join(' / ') : "Sem tradução";
-            } catch (err) {
-                console.error('Erro na tradução:', err);
-                tooltip.innerText = "Erro ❌";
+            let translations = [];
+
+            // Pega a tradução principal
+            if (data.responseData && data.responseData.translatedText) {
+                const mainTrans = data.responseData.translatedText.toLowerCase().trim();
+                translations.push(mainTrans);
             }
-        }
-    });
 
+            // Pega matches alternativos (limita a 2 para não ficar gigante)
+            if (data.matches) {
+                data.matches.forEach(m => {
+                    const t = m.translation.toLowerCase().trim();
+                    if (t && !translations.includes(t) && t.length < 20 && translations.length < 2) {
+                        translations.push(t);
+                    }
+                });
+            }
+
+            // 6. Exibe o resultado
+            tooltip.innerText = translations.length ? translations.join(' / ') : "Sem tradução";
+            
+        } catch (err) {
+            console.error('Erro na tradução:', err);
+            tooltip.innerText = "Erro ❌";
+        }
+    } else {
+        // Se clicar em qualquer outro lugar que não seja um SPAN, fecha o tooltip
+        if (activeTooltip && !el.classList.contains('tooltip')) {
+            activeTooltip.remove();
+            activeTooltip = null;
+        }
+    }
+});
     // Remove tooltip ao clicar fora
     document.addEventListener('mousedown', (e) => {
         if (activeTooltip && !e.target.closest('.tooltip') && e.target.tagName !== 'SPAN') {
             activeTooltip.remove();
             activeTooltip = null;
-} }); } });
+} }); } );

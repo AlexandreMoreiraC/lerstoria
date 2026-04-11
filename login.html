@@ -4,64 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar - Lerstoria</title>
-        <link rel="icon" type="image/png" href="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775337424/izowmcoyatkdluan0kc3.png">
-
+    
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775337424/izowmcoyatkdluan0kc3.png">
     <link rel="stylesheet" href="./style.css">
+
+    <style>
+        /* Estilos específicos para feedback de erro sem quebrar o layout */
+        .error-message {
+            background-color: #fff2f2;
+            color: #d93025;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            display: none; /* Escondido por padrão */
+            border: 1px solid #ffcfcf;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            filter: grayscale(0.5);
+        }
+
+        /* Melhora o foco dos inputs para acessibilidade */
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+        }
+    </style>
 </head>
 <body class="auth-page">
 
     <div class="auth-container">
-        <div class="auth-card">
-            <a href="/index.html" class="logo">.lerstoria</a>
+        <main class="auth-card">
+            <a href="/index.html" class="logo" aria-label="Lerstoria Home">.lerstoria</a>
             
-            <h1 class="story-title" style="font-size: 1.8rem; margin-bottom: 5px;">Bem-vindo de volta!</h1>
-            <p class="auth-subtitle">Sentimos sua falta na leitura.</p>
+            <header>
+                <h1 style="font-size: 1.8rem; margin-bottom: 5px; font-weight: 800;">Bem-vindo de volta!</h1>
+                <p class="auth-subtitle">Sentimos sua falta na leitura.</p>
+            </header>
             
+            <div id="error-display" class="error-message" role="alert"></div>
+
             <form id="login-form" class="auth-form">
                 <div class="input-group">
-                    <input type="email" id="login-email" placeholder="Seu e-mail" class="input-field" required>
+                    <label for="login-email" class="sr-only">E-mail</label>
+                    <input 
+                        type="email" 
+                        id="login-email" 
+                        placeholder="Seu e-mail" 
+                        class="input-field" 
+                        autocomplete="email"
+                        required
+                    >
                 </div>
                 
                 <div class="input-group">
-                    <input type="password" id="login-password" placeholder="Sua senha" class="input-field" required>
+                    <label for="login-password" class="sr-only">Senha</label>
+                    <input 
+                        type="password" 
+                        id="login-password" 
+                        placeholder="Sua senha" 
+                        class="input-field" 
+                        autocomplete="current-password"
+                        required
+                    >
                 </div>
                 
-                <button type="submit" class="btn-primary btn-full">Entrar</button>
+                <button type="submit" id="btn-submit" class="btn-primary btn-full">
+                    <span id="btn-text">Entrar</span>
+                </button>
             </form>
 
-            <div class="auth-footer">
-                Não tem uma conta? <a href="/signup.html" class="auth-link">Crie uma agora</a>
-            </div>
-        </div>
+            <footer class="auth-footer">
+                <span>Não tem uma conta?</span> 
+                <a href="/signup.html" class="auth-link">Crie uma agora</a>
+            </footer>
+        </main>
     </div>
 
     <script type="module">
         import { login } from './auth.js';
 
         const loginForm = document.getElementById('login-form');
+        const btnSubmit = document.getElementById('btn-submit');
+        const btnText = document.getElementById('btn-text');
+        const errorDisplay = document.getElementById('error-display');
 
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Reset de estado
+            errorDisplay.style.display = 'none';
+            btnSubmit.disabled = true;
+            btnText.innerText = 'Entrando...';
 
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
             try {
                 await login(email, password);
-                // Redirecionamento após sucesso
                 window.location.href = 'library.html';
             } catch (error) {
                 console.error("Erro ao entrar:", error);
                 
-                // Tratamento de erros amigável
+                // Mapeamento de erros do Firebase
                 const errorMap = {
                     'auth/user-not-found': "E-mail não cadastrado.",
                     'auth/wrong-password': "Senha incorreta.",
-                    'auth/invalid-credential': "Dados de acesso inválidos.",
-                    'auth/too-many-requests': "Muitas tentativas. Tente mais tarde."
+                    'auth/invalid-credential': "E-mail ou senha inválidos.",
+                    'auth/too-many-requests': "Muitas tentativas. Tente novamente mais tarde.",
+                    'auth/invalid-email': "Formato de e-mail inválido."
                 };
 
-                alert(errorMap[error.code] || "Erro ao entrar: " + error.message);
+                // Exibe erro na tela em vez do alert()
+                errorDisplay.innerText = errorMap[error.code] || "Ocorreu um erro inesperado. Tente novamente.";
+                errorDisplay.style.display = 'block';
+                
+                // Reabilita o botão
+                btnSubmit.disabled = false;
+                btnText.innerText = 'Entrar';
             }
         });
     </script>

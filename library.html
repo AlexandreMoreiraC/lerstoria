@@ -8,73 +8,176 @@
         <link rel="icon" type="image/png" href="https://res.cloudinary.com/dliyfpqqu/image/upload/v1775337424/izowmcoyatkdluan0kc3.png">
 
     <link rel="stylesheet" href="./style.css">
-    <style>
-        /* Ajustes de Layout do Perfil */
-        .btn-logout { 
-            background: none; 
-            border: 2px solid var(--red); 
-            color: var(--red); 
-            padding: 8px 18px; 
-            border-radius: var(--radius-lg); 
-            font-weight: 800; 
-            cursor: pointer; 
-            font-family: inherit; 
-            transition: all 0.2s; 
-            margin-left: 15px; 
-            font-size: 0.9rem; 
-        }
-        .btn-logout:hover { background-color: var(--red); color: white; box-shadow: 0 4px 0 var(--red-dark); transform: translateY(-1px); }
-        .btn-logout:active { transform: translateY(2px); box-shadow: none; }
-        
-        .header-actions { display: flex; align-items: center; }
-        .level-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; margin-top: 40px; }
-        .profile-text { display: flex; flex-direction: column; line-height: 1.2; }
-        .welcome { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .book-card-link { text-decoration: none; color: inherit; }
+<style>
+    /* ============================================================
+       AJUSTES DE LAYOUT DO PERFIL (STORYBOOK STYLE)
+       ============================================================ */
+    
+    .header-actions { 
+        display: flex; 
+        align-items: center; 
+        gap: 10px;
+    }
 
-        /* Botão de Quiz - Estilo 3D Duolingo */
-        .btn-quiz { 
-            display: none; 
-            background-color: var(--primary);
-            color: white;
-            padding: 10px 22px;
-            border-radius: 12px;
-            font-weight: 800;
-            text-decoration: none;
-            font-size: 0.85rem;
-            border: none;
-            box-shadow: 0 4px 0 var(--primary-dark);
-            transition: all 0.1s;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
+    /* Botão de Sair - Elegante e Minimalista */
+    .btn-logout { 
+        background: transparent; 
+        border: 1.5px solid var(--sepia-border); 
+        color: var(--text-soft); 
+        padding: 8px 16px; 
+        border-radius: var(--radius-lg); 
+        font-weight: 700; 
+        cursor: pointer; 
+        font-family: 'Lora', serif; 
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        margin-left: 10px; 
+        font-size: 0.85rem; 
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
 
-        .btn-quiz:hover { filter: brightness(1.1); transform: translateY(-1px); }
-        .btn-quiz:active { transform: translateY(4px); box-shadow: none; }
+    .btn-logout:hover { 
+        background-color: #fff1f1; 
+        border-color: var(--danger); 
+        color: var(--danger); 
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 77, 77, 0.1);
+    }
 
-        /* Estado Bloqueado */
-        .shelf-container.locked {
-            opacity: 0.5;
-            filter: grayscale(1);
-            pointer-events: none;
-            user-select: none;
-        }
-        
-        /* Estado Desbloqueado */
-        .shelf-container:not(.locked) {
-            opacity: 1;
-            filter: grayscale(0);
-            pointer-events: auto;
-        }
+    .btn-logout:active { 
+        transform: translateY(1px); 
+    }
 
-        .horizontal-scroll {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-            scrollbar-width: thin;
-        }
-    </style>
+    /* Cabeçalho de Nível */
+    .level-header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        margin-bottom: 25px; 
+        margin-top: 45px; 
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--sepia-border);
+    }
+
+    .profile-text { 
+        display: flex; 
+        flex-direction: column; 
+        line-height: 1.4; 
+    }
+
+    .welcome { 
+        font-family: 'Lora', serif;
+        font-size: 0.75rem; 
+        color: var(--text-soft); 
+        font-weight: 600; 
+        text-transform: uppercase; 
+        letter-spacing: 1.5px; 
+    }
+
+    /* Link do Card */
+    .book-card-link { 
+        text-decoration: none; 
+        color: inherit; 
+        display: block;
+    }
+
+    /* ============================================================
+       BOTÃO DE QUIZ - ESTILO 3D "PAPER PRESS"
+       ============================================================ */
+    
+    .btn-quiz { 
+        display: inline-flex; /* Mudado de none para inline-flex para controle */
+        align-items: center;
+        background-color: var(--primary);
+        color: white;
+        padding: 10px 24px;
+        border-radius: 14px;
+        font-weight: 800;
+        text-decoration: none;
+        font-size: 0.85rem;
+        border: none;
+        font-family: 'Lora', serif;
+        /* Efeito 3D mais profundo e suave que o Duolingo tradicional */
+        box-shadow: 0 4px 0 #3a1db3; 
+        transition: all 0.15s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+    }
+
+    .btn-quiz:hover { 
+        filter: brightness(1.1); 
+        transform: translateY(-2px); 
+        box-shadow: 0 6px 0 #3a1db3;
+    }
+
+    .btn-quiz:active { 
+        transform: translateY(3px); 
+        box-shadow: 0 1px 0 #3a1db3; 
+    }
+
+    /* ============================================================
+       ESTADOS DA ESTANTE (SHELF)
+       ============================================================ */
+
+    /* Estado Bloqueado - Efeito de "Papel Velho e Esmaecido" */
+    .shelf-container.locked {
+        opacity: 0.4;
+        filter: grayscale(1) sepia(0.2); /* Adiciona um tom levemente envelhecido */
+        pointer-events: none;
+        user-select: none;
+        position: relative;
+    }
+
+    /* Badge de "Trancado" que aparece na estante */
+    .shelf-container.locked::before {
+        content: "LOCKED CONTENT";
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-family: 'Lora', serif;
+        font-size: 0.6rem;
+        font-weight: 800;
+        background: #eee;
+        padding: 4px 10px;
+        border-radius: 4px;
+        color: #999;
+        letter-spacing: 1px;
+        z-index: 5;
+    }
+    
+    /* Estado Desbloqueado */
+    .shelf-container:not(.locked) {
+        opacity: 1;
+        filter: none;
+        pointer-events: auto;
+    }
+
+    /* Scroll Horizontal Customizado */
+    .horizontal-scroll {
+        display: flex;
+        gap: 25px;
+        overflow-x: auto;
+        padding-bottom: 25px;
+        padding-top: 10px;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Esconde no Firefox */
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-track {
+        background: var(--sepia-border);
+        border-radius: 10px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-thumb {
+        background: var(--primary-soft);
+        border-radius: 10px;
+    }
+</style>
 </head>
 <body>
 
@@ -102,7 +205,7 @@
         <section class="shelf-container" data-level="A1">
             <div class="level-header">
                 <h2 class="level-tag">A1 - Beginner ✔</h2>
-<a href="/quiz.html?level=A1" class="btn-quiz">Fazer Prova A1</a>
+<a href="/quiz.html?level=A1" class="btn-quiz">Fazer teste A1</a>
             </div>
             <div class="horizontal-scroll">
                 <div class="book-item" data-id="book_tree">
@@ -151,7 +254,7 @@
         <section class="shelf-container locked" data-level="A2">
             <div class="level-header">
                 <h2 class="level-tag">A2 - Elementary  ✔</h2>
-                <a href="/quiz.html?level=A2" class="btn-quiz">Fazer Prova A2</a>
+                <a href="/quiz.html?level=A2" class="btn-quiz">Fazer teste A2</a>
             </div>
             <div class="horizontal-scroll">
                 <div class="book-item" data-id="a2_island">
@@ -200,7 +303,7 @@
         <section class="shelf-container locked" data-level="B1">
             <div class="level-header">
                 <h2 class="level-tag">B1 - Intermediate  ✔</h2>
-                <a href="/quiz.html?level=B1" class="btn-quiz">Fazer Prova B1</a>
+                <a href="/quiz.html?level=B1" class="btn-quiz">Fazer teste B1</a>
             </div>
             <div class="horizontal-scroll">
                 <div class="book-item" data-id="b1_future"><a href="/book.html?id=b1_future" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=200"></div><p>Future Cities</p></div></a></div>
@@ -214,7 +317,7 @@
         <section class="shelf-container locked" data-level="B2">
             <div class="level-header">
                 <h2 class="level-tag">B2 - Upper Intermediate  ✔</h2>
-                <a href="/quiz.html?level=B2" class="btn-quiz">Fazer Prova B2</a>
+                <a href="/quiz.html?level=B2" class="btn-quiz">Fazer teste B2</a>
             </div>
             <div class="horizontal-scroll">
                 <div class="book-item" data-id="b2_space"><a href="/book.html?id=b2_space" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200"></div><p>Mars Mission</p></div></a></div>
@@ -228,7 +331,7 @@
         <section class="shelf-container locked" data-level="C1">
             <div class="level-header">
                 <h2 class="level-tag">C1 - Advanced  ✔</h2>
-                <a href="/quiz.html?level=C1" class="btn-quiz">Fazer Prova C1</a>
+                <a href="/quiz.html?level=C1" class="btn-quiz">Fazer teste C1</a>
             </div>
             <div class="horizontal-scroll">
                 <div class="book-item" data-id="c1_time"><a href="/book.html?id=c1_time" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1501139083538-0139583c060f?w=200"></div><p>Nature of Time</p></div></a></div>
@@ -242,7 +345,7 @@
         <section class="shelf-container locked" data-level="C2">
             <div class="level-header">
                 <h2 class="level-tag">C2 - Mastery  ✔</h2>
-                <a href="/quiz.html?level=C2" class="btn-quiz">Fazer Prova C2</a>
+                <a href="/quiz.html?level=C2" class="btn-quiz">Fazer teste C2</a>
             </div>
             <div class="horizontal-scroll">
                 <div class="book-item" data-id="c2_quantum"><a href="/book.html?id=c2_quantum" class="book-card-link"><div class="book-card"><div class="book-cover"><img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200"></div><p>Quantum Physics</p></div></a></div>
