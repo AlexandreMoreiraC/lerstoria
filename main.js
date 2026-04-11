@@ -343,6 +343,17 @@ const bookData = {
     },
     };
 
+    function getVoicesAsync() {
+    return new Promise((resolve) => {
+        let voices = speechSynthesis.getVoices();
+        if (voices.length) return resolve(voices);
+
+        speechSynthesis.onvoiceschanged = () => {
+            resolve(speechSynthesis.getVoices());
+        };
+    });
+}
+
 // --- VARIÁVEIS GLOBAIS DE ÁUDIO ---
 let sintetizador = window.speechSynthesis;
 let locucao = null;
@@ -373,41 +384,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadBookContent();
 
-// --- 3. FUNÇÃO DE VOZ (TEXT-TO-SPEECH) ---
-window.toggleOuvir = () => {
+window.toggleOuvir = async () => {
     if (sintetizador.speaking) {
         sintetizador.cancel();
         atualizarBotaoAudio(false);
         return;
     }
 
-    if (storyContainer) {
-        const spans = storyContainer.querySelectorAll('span:not([aria-hidden="true"]):not(.no-tts)');
-        const texto = Array.from(spans).map(s => s.innerText).join(' ');
+    if (!storyContainer) return;
 
-        locucao = new SpeechSynthesisUtterance(texto);
-        locucao.lang = 'en-US';
-        locucao.rate = 0.8;      // velocidade natural
-        locucao.pitch = 0.9;     // tom natural
-        locucao.volume = 1;      // volume máximo
+    const spans = storyContainer.querySelectorAll('span:not([aria-hidden="true"]):not(.no-tts)');
+    const texto = Array.from(spans).map(s => s.innerText).join(' ');
 
-        // Seleciona voz masculina em inglês se disponível
-        const voices = sintetizador.getVoices();
-        locucao.voice = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('male')) 
-                        || voices.find(v => v.lang.startsWith('en')) 
-                        || null;
+    const utterance = new SpeechSynthesisUtterance(texto);
 
-        locucao.onstart = () => atualizarBotaoAudio(true);
-        locucao.onend = () => atualizarBotaoAudio(false);
-        locucao.onerror = () => atualizarBotaoAudio(false);
+    // 🌍 idioma inglês
+    utterance.lang = 'en-us';
 
-        sintetizador.speak(locucao);
+    // 🎧 deixa mais natural
+    utterance.rate = 0.8;
+    utterance.pitch = 0.7;
+    utterance.volume = 5;
 
-        // Para depuração: ver todas vozes disponíveis
-        speechSynthesis.onvoiceschanged = () => {
-            console.log(speechSynthesis.getVoices());
-        };
+   const voices = await getVoicesAsync();
+    // 🎯 tenta pegar a melhor voz disponível
+    const bestVoice =
+    voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('google')) ||
+    voices.find(v => v.lang === 'en-US' && v.name.toLowerCase().includes('male')) ||
+    voices.find(v => v.lang === 'en-GB') ||
+    voices.find(v => v.lang.includes('en')) ||
+    null;
+
+    if (bestVoice) {
+        utterance.voice = bestVoice;
     }
+
+    utterance.onstart = () => atualizarBotaoAudio(true);
+    utterance.onend = () => atualizarBotaoAudio(false);
+    utterance.onerror = () => atualizarBotaoAudio(false);
+
+    sintetizador.speak(utterance);
 };
 
 // Função corrigida para atualizar botão
