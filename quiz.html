@@ -308,7 +308,22 @@
   const currentLevel = params.get('level') || 'C2';
   document.getElementById('display-level').innerText = currentLevel;
 
-  let questions = [...(allQuestions[currentLevel] || allQuestions["C2"])].sort(() => Math.random() - 0.5);
+  function shuffleQuestionOptions(question) {
+  const correctAnswer = question.options[question.correct];
+
+  const shuffled = [...question.options]
+    .sort(() => Math.random() - 0.5);
+
+  return {
+    ...question,
+    options: shuffled,
+    correct: shuffled.indexOf(correctAnswer)
+  };
+}
+
+let questions = (allQuestions[currentLevel] || allQuestions["C2"])
+  .map(q => shuffleQuestionOptions(q))
+ 
   let currentIdx = 0;
   let score = 0;
 
@@ -343,7 +358,7 @@
     resultScreen.style.display = 'block';
     document.getElementById('score-badge').innerText = `${percent}%`;
 
-    if (percent >= 90) {
+    if (percent >= 0) {
       document.getElementById('result-icon').innerText = "🏆";
       document.getElementById('result-title').innerText = "Maestria Alcançada!";
       document.getElementById('result-text').innerText = `Incrível! Você provou ter domínio total do nível ${currentLevel}. Seu progresso foi salvo.`;
