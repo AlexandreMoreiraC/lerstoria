@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./style.css">
 
     <style>
-        /* Estilos específicos para feedback de erro sem quebrar o layout */
         .error-message {
             background-color: #fff2f2;
             color: #d93025;
@@ -17,7 +16,7 @@
             border-radius: 8px;
             font-size: 0.85rem;
             margin-bottom: 15px;
-            display: none; /* Escondido por padrão */
+            display: none;
             border: 1px solid #ffcfcf;
             text-align: center;
             font-weight: 600;
@@ -29,7 +28,6 @@
             filter: grayscale(0.5);
         }
 
-        /* Melhora o foco dos inputs para acessibilidade */
         .input-field:focus {
             outline: none;
             border-color: var(--primary);
@@ -37,20 +35,27 @@
         }
     </style>
 </head>
+
 <body class="auth-page">
 
     <div class="auth-container">
+
         <main class="auth-card">
+
             <a href="/index.html" class="logo" aria-label="Lerstoria Home">.lerstoria</a>
             
             <header>
-                <h1 style="font-size: 1.8rem; margin-bottom: 5px; font-weight: 800;">Bem-vindo de volta!</h1>
+                <h1 style="font-size: 1.8rem; margin-bottom: 5px; font-weight: 800;">
+                    Bem-vindo de volta!
+                </h1>
                 <p class="auth-subtitle">Sentimos sua falta na leitura.</p>
             </header>
-            
+
             <div id="error-display" class="error-message" role="alert"></div>
 
             <form id="login-form" class="auth-form">
+
+                <!-- Email -->
                 <div class="input-group">
                     <label for="login-email" class="sr-only">E-mail</label>
                     <input 
@@ -62,7 +67,8 @@
                         required
                     >
                 </div>
-                
+
+                <!-- Password -->
                 <div class="input-group">
                     <label for="login-password" class="sr-only">Senha</label>
                     <input 
@@ -74,16 +80,18 @@
                         required
                     >
                 </div>
-                
+
                 <button type="submit" id="btn-submit" class="btn-primary btn-full">
                     <span id="btn-text">Entrar</span>
                 </button>
+
             </form>
 
             <footer class="auth-footer">
                 <span>Não tem uma conta?</span> 
                 <a href="/signup.html" class="auth-link">Crie uma agora</a>
             </footer>
+
         </main>
     </div>
 
@@ -95,24 +103,53 @@
         const btnText = document.getElementById('btn-text');
         const errorDisplay = document.getElementById('error-display');
 
+        const emailInput = document.getElementById('login-email');
+        const passwordInput = document.getElementById('login-password');
+
+        const validate = () => {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                return "Preenche todos os campos.";
+            }
+
+            if (!email.includes("@")) {
+                return "E-mail inválido.";
+            }
+
+            if (password.length < 6) {
+                return "Senha inválida.";
+            }
+
+            return null;
+        };
+
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Reset de estado
             errorDisplay.style.display = 'none';
+
+            const validationError = validate();
+            if (validationError) {
+                errorDisplay.innerText = validationError;
+                errorDisplay.style.display = 'block';
+                return;
+            }
+
             btnSubmit.disabled = true;
             btnText.innerText = 'Entrando...';
 
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
 
             try {
                 await login(email, password);
                 window.location.href = 'library.html';
+
             } catch (error) {
                 console.error("Erro ao entrar:", error);
-                
-                // Mapeamento de erros do Firebase
+
                 const errorMap = {
                     'auth/user-not-found': "E-mail não cadastrado.",
                     'auth/wrong-password': "Senha incorreta.",
@@ -121,15 +158,14 @@
                     'auth/invalid-email': "Formato de e-mail inválido."
                 };
 
-                // Exibe erro na tela em vez do alert()
-                errorDisplay.innerText = errorMap[error.code] || "Ocorreu um erro inesperado. Tente novamente.";
+                errorDisplay.innerText = errorMap[error.code] || "Erro ao entrar. Tenta novamente.";
                 errorDisplay.style.display = 'block';
-                
-                // Reabilita o botão
+
                 btnSubmit.disabled = false;
                 btnText.innerText = 'Entrar';
             }
         });
     </script>
+
 </body>
 </html>

@@ -357,7 +357,7 @@ let questions = (allQuestions[currentLevel] || allQuestions["C2"])
     resultScreen.style.display = 'block';
     document.getElementById('score-badge').innerText = `${percent}%`;
 
-    if (percent >= 0) {
+    if (percent >= 90) {
       document.getElementById('result-icon').innerText = "🏆";
       document.getElementById('result-title').innerText = "Maestria Alcançada!";
       document.getElementById('result-text').innerText = `Incrível! Você provou ter domínio total do nível ${currentLevel}. Seu progresso foi salvo.`;
