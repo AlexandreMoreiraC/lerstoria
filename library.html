@@ -19,35 +19,29 @@
         gap: 10px;
     }
 
-    /* Botão de Sair - Elegante e Minimalista */
-    .btn-logout { 
-        background: transparent; 
-        border: 1.5px solid var(--sepia-border); 
-        color: var(--text-soft); 
-        padding: 8px 16px; 
-        border-radius: var(--radius-lg); 
-        font-weight: 700; 
-        cursor: pointer; 
-        font-family: 'Lora', serif; 
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-        margin-left: 10px; 
-        font-size: 0.85rem; 
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
+    /* Botão de Sair - Minimal Premium Dark */
+.btn-logout {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.65);
 
-    .btn-logout:hover { 
-        background-color: #fff1f1; 
-        border-color: var(--danger); 
-        color: var(--danger); 
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(255, 77, 77, 0.1);
-    }
+    padding: 8px 14px;
+    border-radius: 999px;
 
-    .btn-logout:active { 
-        transform: translateY(1px); 
-    }
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.3px;
 
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    transition: all 0.2s ease;
+    margin-left: 10px;
+}
     /* Cabeçalho de Nível */
     .level-header { 
         display: flex; 
@@ -192,7 +186,9 @@
             </div>
             <div class="header-actions">
                 <a href="/library.html" class="logo-small">.lerstoria</a>
+                <div>
                 <button id="btn-logout" class="btn-logout">Sair</button>
+                </div>
             </div>
         </div>
     </header>
